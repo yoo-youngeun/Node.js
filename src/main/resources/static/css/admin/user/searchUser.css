@@ -1,0 +1,7 @@
+body > div#searchUser > div#searchTab > form {
+    display: flex;
+}
+
+body > div#searchUser > div#searchTab > form > .btn {
+    background-color: lightgray;
+}

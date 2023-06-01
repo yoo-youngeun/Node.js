@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>선택자 - 4</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td {
+            border: 1px solid orange;
+        }
+
+        li {
+            color: white;
+            margin: 5px;
+        }
+    </style>
+    <script>
+        $(function(){
+            $('tr:even').css('background', 'red');
+            $('tr:odd').css('background', 'green');
+            $('td:first').css('background', 'yellow');
+            $('td:last').css('background', 'orange');
+            $(':header').css('background', 'blue'); //h요소
+            $('li:eq(0)').css('background', 'navy');//인덱스가 0번인것
+            $('li:gt(0)').css('background', 'purple');  //인덱스가 0번보다 큰것
+            $('li:lt(3)').css('border', '3px solid red');
+            $(':root').css('background', 'skyblue');    //최상위영역 body
+            (function upDown(){
+                $('h3').slideToggle(2000, upDown);//slide를 2초마다 반복
+            })();//(function 함수명(){})()바로실행
+
+            $(':animated').css('border', '3px solid deeppink');
+        })
+    </script>
+</head>
+<body>
+<h2>선택자 - 4</h2>
+<h1>제목 1</h1>
+<h3>제목 2</h3>
+<table>
+    <caption>필터 선택자</caption>
+    <colgroup>
+        <col>
+        <col>
+        <col>
+    </colgroup>
+    <tbody>
+    <tr>
+        <td>1번</td>
+        <td>2번</td>
+        <td>3번</td>
+    </tr>
+    <tr>
+        <td>4번</td>
+        <td>5번</td>
+        <td>6번</td>
+    </tr>
+    <tr>
+        <td>7번</td>
+        <td>8번</td>
+        <td>9번</td>
+    </tr>
+    <tr>
+        <td>10번</td>
+        <td>11번</td>
+        <td>12번</td>
+    </tr>
+    </tbody>
+</table>
+<ul>
+    <li class="bg">내용1</li>
+    <li class="bg">내용2</li>
+    <li class="bg">내용3</li>
+    <li>내용4</li>
+</ul>
+</body>
+</html>

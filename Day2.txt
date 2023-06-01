@@ -1,0 +1,39 @@
+Gradle
+- 오픈소스 빌드 도구(개발 시 자동으로 빌드를 도와주는 프로그램, maven, ant)
+- 의존성 관리의 다양한 방법을 제공
+- maven은 xml 사용, gradle은 groovy 라는 언어를 사용
+
+Lombok
+- 테이블을 구조화한 도메인 클래스(Entity, DTO, VO) 에서 getter/setter 메소드, toString(), equals, hashCode 등의 메서드를 어노테이션으로 사용할 수 있도록 해주는 라이브러리
+    @Data : 자동으로 getter/setter를 사용할 수 있게 해줌
+    @AllArgsConstructor : 모든 매개변수를 지원하는 생성자를 생성
+    @NoArgsConstructor : 매개변수를 갖지않는 기본 생성자를 생성
+    @Entity : DB 테이블과 연결하는 클래스
+    @SequenceGenerator : DB 시퀀스와 연결
+    @Builder : 복합 객체의 생성 과정과 표현 방법을 분리하여 동일한 생성 절차에서 서로 다른 표현의 결과를 만들 수 있도록 패턴을 사용할 수 있음(자바의 메소드체이닝을 사용할 수 있게 해줌)
+
+ORM(Object-Relational Mapping)
+- 객체와 관계형 DB를 매핑
+- 객체를 마치 자바 컬렉션에 저장할 수 있고, 적절한 SQL을 생성해서 DB 객체에 저장
+
+JPA(Java Persistence API)
+- 자바의 ORM 기술 표준
+- 객체를 DB에 저장하고 관리할 때 개발자가 직접 SQL을 작성하지 않아도 됨
+- JPA가 개발자 대신 적절한 SQL을 생성해서 DB에 전달하고, 객체를 자동으로 Mapping 해줌
+- Hibernate(ORM 프레임 워크)가 탑제되어 있고, 전 세계 적으로 가장 많이 쓰는 프레임워크
+
+Spring 삼각형
+1. DI(Dependency Injection)
+- 의존 관계 주입이라고도 하며, 어떤 객체가 사용하는 의존 객체를 직접 만들어 사용하는게 아니라, 주입받아 사용하는 방법(new 연산자를 사용하여 객체를 생성하는 것과 비슷)
+
+@Autowired
+- 필요한 의존 객체의 "타입"에 해당하는 빈을 찾아 주입
+    생성자
+    setter
+    필드
+
+2. AOP
+3. Portable service Abstractions
+
+
+

@@ -1,0 +1,100 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+}
+
+body {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+body > div#wrap {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+body > div#wrap >div#menuWrap {
+    width: 13%;
+    height: 100%;
+    -webkit-touch-callout: none;
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+}
+
+.active {
+    background-color: lightgray !important;
+    border: .5px solid silver !important;
+}
+
+body > div#wrap >div#contentWrap {
+    width: 87%;
+    height: 100%;
+}
+
+body > div#wrap >div#menuWrap >div#header {
+    display: block;
+    width: 100%;
+    height: 100vh;
+}
+
+#hiddenForm {
+    display: none;
+}
+
+#hiddenIframe {
+    display: none;
+}
+
+/*헤더*/
+body > div#wrap >div#menuWrap > div#header > div#logo {
+    width: 100%;
+    height: 70px;
+}
+
+body > div#wrap >div#menuWrap > div#header > div#logo > img {
+    width: 100%;
+    height: 100%;
+    filter: invert(100%);
+}
+
+body > div#wrap > div#menuWrap >div#header > ul.list-group {
+    display: block;
+    width: 100% !important;
+    height: 100vh !important;
+    border-radius: 0px;
+}
+
+body > div#wrap >div#menuWrap >div#header > ul.list-group > li.menu {
+    cursor: pointer !important;
+}
+
+
+/*콘텐츠*/
+body > div#wrap >div#contentWrap > #tag {
+    width: 100%;
+    height: 70px !important;
+}
+
+body > div#wrap >div#contentWrap > iframe#content {
+    display: block;
+    width: 100%;
+    height: 70%;
+    padding: 0px 15px;
+}
+
+/*푸터*/
+body > div#wrap >div#bottWrap {
+    width: 100%;
+    height: 20%;
+    background-color: aliceblue;
+}
+
+body > div#wrap > bottWrap >div#footer {
+    background-color: antiquewhite;
+    width: 100%;
+    height: 100%;
+}
