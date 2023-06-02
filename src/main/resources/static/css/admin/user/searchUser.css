@@ -1,7 +1,11 @@
+body {
+    background-color: pink;
+}
+
 body > div#searchUser > div#searchTab > form {
     display: flex;
 }
 
-body > div#searchUser > div#searchTab > form > .btn {
-    background-color: lightgray;
+body > div#searchUser > div#searchTab > form#frm > button.btn {
+    background-color: lightgray !important;
 }

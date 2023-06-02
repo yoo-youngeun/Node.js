@@ -19,24 +19,29 @@ public class AdminController {
     @GetMapping("/index")
     public ModelAndView index() {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/html/admin/index.html");
+//        mv.setViewName("/html/admin/index.html");
+        mv.setViewName("/html/admin/index");
         return mv;
     }
 
     @GetMapping("/iframe")
-    public ModelAndView iframe(Model model) {
+    public ModelAndView iframe() {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/html/admin/iframe.html");
-        mv.addObject("str", "dddddddd");
-//        System.out.println("adfsfsafsdf");
-//        return "/html/admin/iframe";
+        mv.setViewName("/html/admin/iframe");
+        return mv;
+    }
+
+    @GetMapping("/home")
+    public ModelAndView home() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/html/admin/home");
         return mv;
     }
 
     @GetMapping("/hiddenForm")
     public ModelAndView hiddenForm(Model model) {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/html/admin/hiddenForm.html");
+        mv.setViewName("/html/admin/hiddenForm");
 //        return "/html/admin/iframe";
         return mv;
     }
@@ -44,26 +49,21 @@ public class AdminController {
     @GetMapping("/users")
     public ModelAndView getUsers() {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/html/admin/users/searchUser.html");
+//        mv.setViewName("/html/admin/users/searchUser.html");
+        mv.setViewName("/html/admin/users/searchUser");
 
         return mv;
     }
 
 
     @GetMapping("/searchUsers")
-    public String searchUser(Model model) {
+    public ModelAndView searchUser(Model model) {
         ModelAndView mv = new ModelAndView();
         List<Users> usersList = service.searchUsers();
-        for (int i = 0; i < usersList.size(); i++) {
-            System.out.println(usersList.get(i).getId());
-            System.out.println(usersList.get(i).getName());
-            System.out.println(usersList.get(i).getUserid());
-            System.out.println("=========");
-        }
-
-//        mv.setViewName("/html/admin/users/searchUser.html");
-//        mv.addObject("usersList", usersList);
+        mv.setViewName("/html/admin/users/searchUser");
+        mv.addObject("userList", usersList);
         model.addAttribute("usersList", usersList);
-        return "/html/admin/users/searchUser.html";
+//        return "/html/admin/users/searchUser.html";
+        return mv;
     }
 }
