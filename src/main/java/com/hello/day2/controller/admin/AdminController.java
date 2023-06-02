@@ -17,38 +17,34 @@ public class AdminController {
     private UsersService service;
 
     @GetMapping("/index")
-    public ModelAndView index() {
-        ModelAndView mv = new ModelAndView();
+    public ModelAndView index(ModelAndView mv) {
 //        mv.setViewName("/html/admin/index.html");
         mv.setViewName("/html/admin/index");
         return mv;
     }
 
     @GetMapping("/iframe")
-    public ModelAndView iframe() {
-        ModelAndView mv = new ModelAndView();
+    public ModelAndView iframe(ModelAndView mv) {
         mv.setViewName("/html/admin/iframe");
         return mv;
     }
 
     @GetMapping("/home")
-    public ModelAndView home() {
-        ModelAndView mv = new ModelAndView();
+    public ModelAndView home(ModelAndView mv) {
+//        ModelAndView mv = new ModelAndView();
         mv.setViewName("/html/admin/home");
         return mv;
     }
 
     @GetMapping("/hiddenForm")
-    public ModelAndView hiddenForm(Model model) {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("/html/admin/hiddenForm");
+    public String hiddenForm() {
+//        mv.setViewName("/html/admin/hiddenForm");
 //        return "/html/admin/iframe";
-        return mv;
+        return "/html/admin/hiddenForm";
     }
 
     @GetMapping("/users")
-    public ModelAndView getUsers() {
-        ModelAndView mv = new ModelAndView();
+    public ModelAndView getUsers(ModelAndView mv) {
 //        mv.setViewName("/html/admin/users/searchUser.html");
         mv.setViewName("/html/admin/users/searchUser");
 
@@ -57,12 +53,11 @@ public class AdminController {
 
 
     @GetMapping("/searchUsers")
-    public ModelAndView searchUser(Model model) {
-        ModelAndView mv = new ModelAndView();
+    public ModelAndView searchUser(ModelAndView mv) {
         List<Users> usersList = service.searchUsers();
         mv.setViewName("/html/admin/users/searchUser");
         mv.addObject("userList", usersList);
-        model.addAttribute("usersList", usersList);
+//        model.addAttribute("usersList", usersList);
 //        return "/html/admin/users/searchUser.html";
         return mv;
     }
