@@ -64,4 +64,9 @@ $(function() {
         searchUsers();
     })
 
+    $(".viewLink").on("click", function() {
+        let url = $(this).prev("a").attr("href");
+        console.log(url);
+        window.open(url, "width=1200,height=800");
+    });
 })

@@ -60,3 +60,16 @@ body > div#searchUser > div#result {
     padding: 0px 10px;
 }
 
+body > div#searchUser > div#result > table#searchResult tr > td {
+    color: pink !important;
+}
+
+body > div#searchUser > div#result > table#searchResult tr > td > a {
+    text-indent: -999px;
+}
+
+body > div#searchUser > div#result > table#searchResult > tr > td > span.viewLink {
+    display: inline-block;
+    cursor: pointer;
+    color: cadetblue;
+}

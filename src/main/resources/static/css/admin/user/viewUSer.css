@@ -1,5 +1,19 @@
-body > div#searchUser > div#title {
+body > div#viewUser > div#title {
     display: block;
     width: 100%;
     height: 50px;
+}
+
+body > div#viewUser > div#result {
+    width: 80%;
+    display: flex;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    flex-wrap: nowrap;
+
+}
+
+body > div#viewUser > div#result > table#viewResult {
+    width: 100%;
 }
