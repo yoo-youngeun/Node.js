@@ -4,11 +4,10 @@ import com.hello.day2.model.entity.Users;
 import com.hello.day2.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/am")
@@ -16,7 +15,7 @@ public class AdminController {
     @Autowired
     private UsersService service;
 
-    @GetMapping("/index")
+    @GetMapping("")
     public ModelAndView index(ModelAndView mv) {
 //        mv.setViewName("/html/admin/index.html");
         mv.setViewName("/html/admin/index");
@@ -43,7 +42,7 @@ public class AdminController {
         return "/html/admin/hiddenForm";
     }
 
-    @GetMapping("/users")
+    @GetMapping("/user")
     public ModelAndView getUsers(ModelAndView mv) {
 //        mv.setViewName("/html/admin/users/searchUser.html");
         mv.setViewName("/html/admin/users/searchUser");
@@ -51,14 +50,19 @@ public class AdminController {
         return mv;
     }
 
-
     @GetMapping("/searchUsers")
-    public ModelAndView searchUser(ModelAndView mv) {
+    @ResponseBody
+    public List<Users> searchUsers() {
         List<Users> usersList = service.searchUsers();
-        mv.setViewName("/html/admin/users/searchUser");
-        mv.addObject("userList", usersList);
-//        model.addAttribute("usersList", usersList);
-//        return "/html/admin/users/searchUser.html";
-        return mv;
+        return usersList;
     }
+
+
+    @PostMapping("/searchUser")
+    @ResponseBody
+    public List<Users> searchUser(@RequestParam(required = false) Map<String, String> param) {
+        List<Users> usersList = service.searchUser(param);
+        return usersList;
+    }
+
 }

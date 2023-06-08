@@ -1,11 +1,34 @@
 body {
-    background-color: pink;
+    /*background-color: pink;*/
 }
 
-body > div#searchUser > div#searchTab > form {
+body > div#searchUser > div#searchTab > form#frm {
     display: flex;
+    width: 100%;
+    height: 60px;
+    border: 1px solid lightgray;
+    margin-bottom: 10px;
+    justify-content: space-around;
+    align-items: center !important;
 }
 
-body > div#searchUser > div#searchTab > form#frm > button.btn {
+body > div#searchUser > div#searchTab > form#frm > table#searchTable {
+    width: 90%;
+    height: 58.7px !important;
+    margin: 0px;
+    vertical-align: middle;
+    text-align: center;
+    border-spacing: 0px;
+}
+
+
+body > div#searchUser > div#searchTab > form#frm > input.form-control {
+    width: 100%;
+    height: 40px;
+}
+
+body > div#searchUser > div#searchTab > form#frm > input.btn {
     background-color: lightgray !important;
+    width: 70px;
+    border: 1px solid dimgray;
 }
