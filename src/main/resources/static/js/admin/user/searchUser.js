@@ -1,6 +1,9 @@
 'use constrict';
 
 $(function() {
+    let buttHeight = $("#searchTable").height();
+    $("#button.btn").css("height", buttHeight);
+
     let userList = new Vue({
         // el : 연결할 영역을 지정
         el: "#searchResult",
@@ -8,11 +11,9 @@ $(function() {
         data : {
             userList : {}
         }
-    })
+    });
 
     searchUsers();
-    let buttHeight = $("#searchTable").height();
-    $("#button.btn").css("height", buttHeight);
 
     function searchUsers() {
         axios({
@@ -25,19 +26,21 @@ $(function() {
     }
 
     $("#searchButt").on("click", function() {
-        let userid = $("#userid").val();
-        let name = $("#name").val();
-        if (userid.trim().length == 0 && name.trim().length == 0) {
-            alert("검색조건을 입력하세요");
+        let userid = $("#userid").val().trim();
+        let name = $("#name").val().trim();
+        let status = $("#status").val().trim();
+        if (userid.length == 0 && name.length == 0 && status.length == 0) {
+            alert("검색조건을 지정하세요");
         } else {
-            searchUser(userid, name);
+            searchUser(userid, name, status);
         }
-    })
+    });
 
-    function searchUser(userid, name) {
+    function searchUser(userid, name, status) {
         const frm = new FormData();
         frm.append('userid', userid);
         frm.append('name', name);
+        frm.append('status', status);
 
         axios.post('/am/searchUser', frm)
             .then((response) => {
@@ -53,4 +56,12 @@ $(function() {
                 // 예외 처리
             });
     }
+
+    $("#reset").on("click", function() {
+        $("#userid").val("");
+        $("#name").val("");
+        $("#status").val("REGISTERED");
+        searchUsers();
+    })
+
 })

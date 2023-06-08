@@ -16,11 +16,11 @@ public class UsersRepositoryTest extends Day2ApplicationTests {
     @Test
     public void create() {
         Users user = Users.builder()
-                .userid("banana")
-                .userpw("2222")
-                .name("반하나")
-                .hp("010-2222-2222")
-                .email("banana@banana.com")
+                .userid("test")
+                .userpw("test")
+                .name("테스트용")
+                .hp("010-7894-1454")
+                .email("test@test.com")
                 .status(UserStatus.REGISTERED)
                 .regDate(LocalDateTime.now())
                 .build();

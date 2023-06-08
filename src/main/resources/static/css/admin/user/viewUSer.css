@@ -1,0 +1,5 @@
+body > div#searchUser > div#title {
+    display: block;
+    width: 100%;
+    height: 50px;
+}

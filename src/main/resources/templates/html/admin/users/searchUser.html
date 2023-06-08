@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>searchUser</title>
@@ -8,50 +8,92 @@
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <link th:href="@{/css/admin/user/searchUser.css}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/admin/user/searchUser.css}">
-    <link th:href="@{/css/admin/index.css}" rel="stylesheet">
+    <link rel="stylesheet" href="/css/admin/user/searchUser.css">
+    <link rel="stylesheet" href="/css/admin/index.css">
 </head>
 <body>
     <div id="searchUser">
+        <div id="title">회원목록<hr></div>
         <div id="searchTab">
             <form action="" method="get" id="frm">
                 <table id="searchTable" class="table table-border">
                     <colgroup>
-                        <col width="10%">
-                        <col width="40%">
-                        <col width="10%">
-                        <col width="40%">
+                        <col width="13%">
+                        <col width="20%">
+                        <col width="13%">
+                        <col width="20%">
+                        <col width="13%">
+                        <col width="20%">
                     </colgroup>
                     <tr>
                         <th>아이디</th>
                         <td><input type="text" name="userid" class="form-control" id="userid"></td>
                         <th>이름</th>
                         <td><input type="text" name="name" class="form-control" id="name"></td>
+                        <th>가입상태</th>
+                        <td>
+                            <select id="status">
+                                <option value="REGISTERED" selected>REGISTERED</option>
+                                <option value="UNREGISTERED">UNREGISTERED</option>
+                            </select>
+                        </td>
                     </tr>
                 </table>
-                <input type="button" value="조회" id="searchButt" class="btn btn-primary">
+                <div id="buttArea">
+                    <input type="button" value="조회" id="searchButt" class="btn btn-primary">
+                    <input type="button" value="초기화" id="reset" class="btn btn-primary">
+                </div>
             </form>
         </div>
         <div id="result">
             <table id="searchResult" class="table table-striped table-hover">
+                <colgroup>
+                    <col width="15%">
+                    <col width="10%">
+                    <col width="30%">
+                    <col width="15%">
+                    <col width="18%">
+                    <col width="12%">
+                </colgroup>
                 <tr>
                     <th>아이디</th>
                     <th>이름</th>
                     <th>이메일</th>
                     <th>연락처</th>
                     <th>가입일</th>
+                    <th>상태</th>
                 </tr>
                 <tr v-for="user in userList">
-                    <td><a :href=`/am/searchUsers/${user.id}`>{{user.userid}}</a></td>
+                    <td><a :href=`/am/searchUser/${user.id}`>{{user.userid}}</a></td>
                     <td>{{user.name}}</td>
                     <td>{{user.email}}</td>
                     <td>{{user.hp}}</td>
                     <td>{{user.regDate.substring(0,10)}}</td>
+                    <td>{{user.status}}</td>
                 </tr>
             </table>
         </div>
     </div>
+    <!-- 달력 -->
+<!--    <div class="sec_cal">-->
+<!--        <div class="cal_nav">-->
+<!--            <a href="javascript:;" class="nav-btn go-prev">prev</a>-->
+<!--            <div class="year-month"></div>-->
+<!--            <a href="javascript:;" class="nav-btn go-next">next</a>-->
+<!--        </div>-->
+<!--        <div class="cal_wrap">-->
+<!--            <div class="days">-->
+<!--                <div class="day">MON</div>-->
+<!--                <div class="day">TUE</div>-->
+<!--                <div class="day">WED</div>-->
+<!--                <div class="day">THU</div>-->
+<!--                <div class="day">FRI</div>-->
+<!--                <div class="day">SAT</div>-->
+<!--                <div class="day">SUN</div>-->
+<!--            </div>-->
+<!--            <div class="dates"></div>-->
+<!--        </div>-->
+<!--    </div>-->
 </body>
 <script src="/js/admin/user/searchUser.js" /></script>
 </html>

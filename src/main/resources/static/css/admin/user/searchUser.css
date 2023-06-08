@@ -2,33 +2,61 @@ body {
     /*background-color: pink;*/
 }
 
+body > div#searchUser > div#title {
+    display: block;
+    width: 100%;
+    height: 50px;
+}
+
+body > div#searchUser > div#searchTab {
+    margin-bottom: 30px;
+}
+
 body > div#searchUser > div#searchTab > form#frm {
     display: flex;
     width: 100%;
     height: 60px;
     border: 1px solid lightgray;
-    margin-bottom: 10px;
     justify-content: space-around;
     align-items: center !important;
 }
 
 body > div#searchUser > div#searchTab > form#frm > table#searchTable {
-    width: 90%;
+    width: 85%;
     height: 58.7px !important;
     margin: 0px;
     vertical-align: middle;
     text-align: center;
     border-spacing: 0px;
+    border-style: none;
 }
 
+body > div#searchUser > div#searchTab > form#frm > table#searchTable tr, th, td {
+    border-style: none;
+}
 
-body > div#searchUser > div#searchTab > form#frm > input.form-control {
+body > div#searchUser > div#searchTab > form#frm > table#searchTable > tr > th, td > input.form-control {
     width: 100%;
     height: 40px;
 }
 
-body > div#searchUser > div#searchTab > form#frm > input.btn {
+body > div#searchUser > div#searchTab > form#frm > div#buttArea {
+    width: 170px;
+    display: flex;
+    justify-content: space-around;
+}
+
+body > div#searchUser > div#searchTab > form#frm > div#buttArea > input.btn {
     background-color: lightgray !important;
     width: 70px;
     border: 1px solid dimgray;
 }
+
+body > div#searchUser > div#searchTab > form#frm > div#buttArea > input.btn:last-child {
+    background-color: dimgray !important;
+}
+
+body > div#searchUser > div#result {
+    padding: 0px 10px;
+}
+

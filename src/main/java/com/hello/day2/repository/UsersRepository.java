@@ -1,6 +1,8 @@
 package com.hello.day2.repository;
 
+import com.hello.day2.enumclass.UserStatus;
 import com.hello.day2.model.entity.Users;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -28,12 +30,12 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
     // select * from users where userid=? and userpw=?
     Optional<Users> findUsersByUseridAndUserpw(String userid, String userpw);
 
-    // 회원 조건 검색
     List<Users> findUsersByUseridAndName(String userid, String name);
     Users findUsersByUserid(String userid);
-    List<Users> findUsersByName(String name);
-
+    Users findUsersByUseridAndStatus(String userid, UserStatus status);
+    List<Users> findUsersByUseridAndNameLikeAndStatus(String userid, String name, UserStatus status);
+    List<Users> findUsersByStatus(UserStatus status);
     // like 검색
     List<Users> findUsersByNameLike(String name);
-
+    List<Users> findUsersByNameLikeAndStatus(String name, UserStatus status);
 }

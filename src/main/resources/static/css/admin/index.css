@@ -59,6 +59,7 @@ body > div#wrap >div#menuWrap > div#header > div#logo > img {
     width: 100%;
     height: 100%;
     filter: invert(100%);
+    cursor: pointer;
 }
 
 body > div#wrap > div#menuWrap >div#header > ul.list-group {
