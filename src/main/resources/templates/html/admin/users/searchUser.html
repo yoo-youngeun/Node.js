@@ -10,6 +10,14 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="/css/admin/user/searchUser.css">
     <link rel="stylesheet" href="/css/admin/index.css">
+    <script>
+        $(".viewLink").on("click", function() {
+            alert("dddd");
+            // let url = $(this).prev("a").attr("href");
+            // console.log(url);
+            // window.open(url, "width=1200,height=800");
+        });
+    </script>
 </head>
 <body>
     <div id="searchUser">
@@ -26,7 +34,8 @@
                         <col width="20%">
                     </colgroup>
                     <tr>
-                        <th>아이디</th>
+                        <th>
+                            <div class="viewLink">아이디</div></th>
                         <td><input type="text" name="userid" class="form-control" id="userid"></td>
                         <th>이름</th>
                         <td><input type="text" name="name" class="form-control" id="name"></td>
@@ -56,7 +65,7 @@
                     <col width="12%">
                 </colgroup>
                 <tr>
-                    <th>아이디</th>
+                    <th><div class="viewLink">아이디</div></th>
                     <th>이름</th>
                     <th>이메일</th>
                     <th>연락처</th>
@@ -65,9 +74,9 @@
                 </tr>
                 <tr v-for="user in userList">
                     <td>
-                        <a :href=`/am/searchUser/${user.id}`>dfs</a>
-                        <span class="viewLink">{{user.userid}}</span>
+                        <div class="viewLink" v-on:click=viewPage(`/am/searchUser/${user.id}`)>{{user.userid}}</div>
                     </td>
+                    <td class='hidden'>/am/searchUser/{{user.id}}</td>
                     <td>{{user.name}}</td>
                     <td>{{user.email}}</td>
                     <td>{{user.hp}}</td>

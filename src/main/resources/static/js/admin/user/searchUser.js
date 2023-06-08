@@ -10,6 +10,11 @@ $(function() {
         // data : 데이터 값
         data : {
             userList : {}
+        },
+        methods: {
+            viewPage : function(url) {
+                window.open(url, "width=1200,height=300", "_target");
+            }
         }
     });
 
@@ -65,7 +70,8 @@ $(function() {
     })
 
     $(".viewLink").on("click", function() {
-        let url = $(this).prev("a").attr("href");
+        alert("dddd");
+        let url = $(this).next("td").text();
         console.log(url);
         window.open(url, "width=1200,height=800");
     });
