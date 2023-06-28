@@ -68,4 +68,12 @@ public class UsersRepositoryTest extends Day2ApplicationTests {
                 }
         );
     }
+
+    @Test
+    public void test() {
+        UserStatus[] userStatuses = UserStatus.values();
+        for (int i = 0; i < userStatuses.length; i++) {
+            System.out.println(i+"::" + userStatuses[i]);
+        }
+    }
 }

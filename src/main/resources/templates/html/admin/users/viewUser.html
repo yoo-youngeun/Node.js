@@ -41,6 +41,10 @@
                 <td>{{user.status}}</td>
             </tr>
         </table>
+        <div id="buttArea">
+            <input type="button" id="update" v-on:click=updatePage(`${user.userid}`) class="btn btn-primary" value="수정">
+            <input type="button" id="close" class="btn btn-primary" value="닫기">
+        </div>
     </div>
 </div>
 </body>

@@ -8,6 +8,7 @@ $(function() {
     // Menu 클릭 시 이벤트
     $(".menu").on("click", function () {
         let id = $(this).attr("id");
+        let addr = id.substr(5);
         $(".menu").removeClass("active");
         $(".menu").css({"font-weight" : "lighter"});
 
@@ -16,7 +17,7 @@ $(function() {
             "font-weight" : "bold"
         });
 
-        $("#content").attr("src", "am/" + id.substr(5));
+        $("#content").attr("src", "/am/" + addr);
     });
 });
 

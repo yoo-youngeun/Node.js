@@ -34,7 +34,8 @@ public class UsersService {
             usersList = usersRepository.findUsersByUseridAndNameLikeAndStatus(userid, "%"+name+"%", UserStatus.valueOf(status));
         } else if (checkNull(userid) && !checkNull(name)) { // 아이디만 존재
             System.out.println("아이디만 존재");
-            Users findUser = usersRepository.findUsersByUseridAndStatus(userid, UserStatus.valueOf(status)); usersList.add(findUser);
+            usersList = usersRepository.findUsersByUseridLikeAndStatus("%"+userid+"%", UserStatus.valueOf(status));
+
         } else if (!checkNull(userid) && checkNull(name)) { // 이름만 존재
             System.out.println("이름만 존재");
             usersList = usersRepository.findUsersByNameLikeAndStatus("%"+name+"%", UserStatus.valueOf(status));

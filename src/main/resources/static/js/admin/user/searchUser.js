@@ -13,7 +13,7 @@ $(function() {
         },
         methods: {
             viewPage : function(url) {
-                window.open(url, "width=1200,height=300", "_target");
+                window.open(url, "_blank", "width=860,height=600");
             }
         }
     });
@@ -69,10 +69,10 @@ $(function() {
         searchUsers();
     })
 
-    $(".viewLink").on("click", function() {
-        alert("dddd");
-        let url = $(this).next("td").text();
-        console.log(url);
-        window.open(url, "width=1200,height=800");
-    });
+    // $(".viewLink").on("click", function() {
+    //     alert("dddd");
+    //     let url = $(this).next("td").text();
+    //     alert(url);
+    //     window.open(url, "width=1200,height=600");
+    // });
 })

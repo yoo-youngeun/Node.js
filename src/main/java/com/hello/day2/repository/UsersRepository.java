@@ -2,8 +2,8 @@ package com.hello.day2.repository;
 
 import com.hello.day2.enumclass.UserStatus;
 import com.hello.day2.model.entity.Users;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -38,4 +38,8 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
     // like 검색
     List<Users> findUsersByNameLike(String name);
     List<Users> findUsersByNameLikeAndStatus(String name, UserStatus status);
+    List<Users> findUsersByUseridLikeAndStatus(String userid, UserStatus status);
+
+    @Query("select distinct status from Users")
+    List<String> findDistinctStatus();
 }

@@ -1,5 +1,6 @@
 package com.hello.day2.controller.admin;
 
+import com.hello.day2.enumclass.UserStatus;
 import com.hello.day2.model.entity.Users;
 import com.hello.day2.repository.UsersRepository;
 import com.hello.day2.service.UsersService;
@@ -7,9 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+
+import java.util.*;
 
 @Controller
 @RequestMapping("/am")
@@ -90,4 +90,33 @@ public class AdminController {
         return user;
     }
 
+    @GetMapping("/updateUser/{id}")
+    public ModelAndView updatePage(@PathVariable String id) {
+        ModelAndView mv = new ModelAndView("/html/admin/users/updateUser");
+        return mv;
+    }
+
+//    @GetMapping("/getStatusList")
+//    @ResponseBody
+//    public List<Map<String, Object>>getStatusList() {
+//        UserStatus[] userStatuses = UserStatus.values();
+//        List<Map<String, Object>> statusList = new ArrayList<>();
+//        for (int i = 0; i < userStatuses.length; i++) {
+//            Map<String, Object> state = new HashMap<>();
+//            state.put("status", userStatuses[i]);
+//            statusList.add(state);
+//        }
+//        return statusList;
+//    }
+
+    @GetMapping("/getStatusList")
+    @ResponseBody
+    public List<UserStatus>getStatusList() {
+        UserStatus[] userStatuses = UserStatus.values();
+        List<UserStatus> statusList = new ArrayList<>();
+        for (int i = 0; i < userStatuses.length; i++) {
+            statusList.add(userStatuses[i]);
+        }
+        return statusList;
+    }
 }
