@@ -10,6 +10,9 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="/css/admin/user/updateUser.css">
     <link rel="stylesheet" href="/css/admin/index.css">
+    <script defer>
+        console.log($("#statusList"));
+    </script>
 </head>
 <body>
 <form id="updateUser">
@@ -39,10 +42,10 @@
                 <td>{{user.regDate.substring(0,10)}}</td>
                 <th>상태</th>
                 <td>
-                    <select id="statusList">
-                        <option v-for="state in statusList" v-model="state" :name="state" :id="state" onload="checkStatus(state)">{{state}}</option>
+                    <select id="statusList" v-on:click="[checkStatus(`${user.status}`), select($event)]">
+                        <option v-for="state in statusList" v-model="state" name="state" :id="state">{{state}}</option>
                     </select>
-                    <p id="text"></p>
+<!--                    <p id="text"></p>-->
                 </td>
             </tr>
         </table>
