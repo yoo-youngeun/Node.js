@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class UsersService {
@@ -54,5 +55,22 @@ public class UsersService {
         if (param != null && param != "" && param.length() != 0) { check = true; }
 
         return check;
+    }
+
+    public Users updateUser(Map<String, String> param) throws Exception {
+        System.out.println("====================== updateUser start ======================");
+        Users user = usersRepository.findUsersByUserid(param.get("userid"));
+        try {
+            if (user != null) {
+                user.setStatus(UserStatus.valueOf(param.get("status")));
+                user.setStatus(UserStatus.valueOf(param.get("hp")));
+                user.setStatus(UserStatus.valueOf(param.get("email")));
+
+                user = usersRepository.save(user);
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 }

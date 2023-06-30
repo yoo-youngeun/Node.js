@@ -34,6 +34,6 @@ $(function() {
     })
 
     $("input#update").on("click", function() {
-        location.href="/am/updateUser/"+idx;
+        location.href="/am/updatePage/"+idx;
     })
 })

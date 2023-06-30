@@ -15,46 +15,47 @@
     </script>
 </head>
 <body>
-<form id="updateUser">
-    <div id="title">회원정보수정<hr></div>
-    <div id="result">
-        <table id="viewResult" class="table table-striped-columns table-hover">
-            <colgroup>
-                <col width="20%">
-                <col width="30%">
-                <col width="20%">
-                <col width="30%">
-            </colgroup>
-            <tr>
-                <th>아이디</th>
-                <td>{{user.userid}}</td>
-                <th>이름</th>
-                <td>{{user.name}}</td>
-            </tr>
-            <tr>
-                <th>이메일</th>
-                <td><input type="text" id="email" v-model="user.email"></td>
-                <th>연락처</th>
-                <td><input type="text" id="hp" v-model="user.hp"></td>
-            </tr>
-            <tr>
-                <th>가입일</th>
-                <td>{{user.regDate.substring(0,10)}}</td>
-                <th>상태</th>
-                <td>
-                    <select id="statusList" v-on:click="[checkStatus(`${user.status}`), select($event)]">
-                        <option v-for="state in statusList" v-model="state" name="state" :id="state">{{state}}</option>
-                    </select>
-<!--                    <p id="text"></p>-->
-                </td>
-            </tr>
-        </table>
-        <div id="buttArea">
-            <input type="button" id="update" class="btn btn-primary" value="수정">
-            <input type="button" id="close" class="btn btn-primary" value="취소">
+    <div id="updateUser" method="post" >
+        <form :action=`/am/updateUser/${user.id}`>
+        <div id="title">회원정보수정<hr></div>
+        <div id="result">
+            <table id="viewResult" class="table table-striped-columns table-hover">
+                <colgroup>
+                    <col width="20%">
+                    <col width="30%">
+                    <col width="20%">
+                    <col width="30%">
+                </colgroup>
+                <tr>
+                    <th>아이디</th>
+                    <td><input type="text" name="userid" id="userid" v-model="user.userid" readonly></td>
+                    <th>이름</th>
+                    <td><input type="text" name="name" id="name" v-model="user.name" readonly></td>
+                </tr>
+                <tr>
+                    <th>이메일</th>
+                    <td><input type="text" name="email" id="email" v-model="user.email"></td>
+                    <th>연락처</th>
+                    <td><input type="text" name="hp" id="hp" v-model="user.hp"></td>
+                </tr>
+                <tr>
+                    <th>가입일</th>
+                    <td><input type="text" name="regDate" id="regDate" v-model="user.regDate.substring(0,10)" readonly></td>
+                    <th>상태</th>
+                    <td>
+                        <select id="statusList" v-on:click.once="[checkStatus(`${user.status}`), select($event)]" ref="selectState">
+                            <option v-for="state in statusList" v-model="state" name="state" :id="state">{{state}}</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <div id="buttArea">
+                <input type="submit" id="update" onsubmit="update()" class="btn btn-primary" value="수정">
+                <input type="button" id="close" v-on:click=viewPage(`/am/searchUser/${user.id}`) class="btn btn-primary" value="취소">
+            </div>
         </div>
+        </form>
     </div>
-</form>
 </body>
 <script src="/js/admin/user/updateUser.js" /></script>
 </html>

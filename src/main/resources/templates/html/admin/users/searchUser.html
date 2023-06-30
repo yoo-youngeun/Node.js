@@ -73,8 +73,7 @@
                     <td>
                         <div class="viewLink" v-on:click=viewPage(`/am/searchUser/${user.id}`)>{{user.userid}}</div>
                     </td>
-                    <td class='hidden'>/am/searchUser/{{user.id}}</td>
-                    <td>{{user.name}}</td>
+                    <td><div class="viewLink" v-on:click=viewPage(`/am/searchUser/${user.id}`)>{{user.name}}</div></td>
                     <td>{{user.email}}</td>
                     <td>{{user.hp}}</td>
                     <td>{{user.regDate.substring(0,10)}}</td>

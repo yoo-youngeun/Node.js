@@ -90,24 +90,28 @@ public class AdminController {
         return user;
     }
 
-    @GetMapping("/updateUser/{id}")
-    public ModelAndView updatePage(@PathVariable String id) {
+    @GetMapping("/updatePage/{id}")
+    public ModelAndView updatePage(@PathVariable Long id){
         ModelAndView mv = new ModelAndView("/html/admin/users/updateUser");
         return mv;
     }
 
-//    @GetMapping("/getStatusList")
-//    @ResponseBody
-//    public List<Map<String, Object>>getStatusList() {
-//        UserStatus[] userStatuses = UserStatus.values();
-//        List<Map<String, Object>> statusList = new ArrayList<>();
-//        for (int i = 0; i < userStatuses.length; i++) {
-//            Map<String, Object> state = new HashMap<>();
-//            state.put("status", userStatuses[i]);
-//            statusList.add(state);
+    @GetMapping("/updateUser/{id}")
+    @ResponseBody
+    public void updateUser(@PathVariable Long id, @RequestParam(required = false) Map<String, String> param) throws Exception {
+//        Users exUser = repository.findUsersByUserid(param.get("userid"));
+//        Users user = service.updateUser(param);
+
+        System.out.println(param.get("userid")+param.get("email")+param.get("hp")+param.get("status"));
+
+//        if (user != null && exUser != null) {
+//            System.out.println("기존 userid ::: " + exUser.getUserid() + "변경된 userid ::: " + user.getStatus());
+//            System.out.println("기존 email ::: " + exUser.getEmail() + "변경된 email ::: " + user.getEmail());
+//            System.out.println("기존 status ::: " + exUser.getStatus() + "변경된 status ::: " + user.getStatus());
+//        } else {
+//            System.out.println("비엇서");
 //        }
-//        return statusList;
-//    }
+    }
 
     @GetMapping("/getStatusList")
     @ResponseBody

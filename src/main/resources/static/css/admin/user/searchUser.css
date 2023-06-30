@@ -73,3 +73,12 @@ body > div#searchUser > div#result > table#searchResult tr > td > div.viewLink {
 td.hidden {
     display: none;
 }
+
+body > div#searchUser > div#result input.btn  {
+    background-color: lightgray !important;
+    border: 1px solid dimgray;
+}
+
+body > div#searchUser > div#result > table#searchResult > tr > td:nth-child(even) >  input.btn {
+    background-color: dimgray !important;
+}

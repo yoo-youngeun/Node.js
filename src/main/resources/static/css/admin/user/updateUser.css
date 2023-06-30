@@ -1,38 +1,38 @@
-body > form#updateUser > div#title {
+body > div#updateUser > div#title {
     display: block;
     width: 100%;
     height: 45px;
     padding: 3px 0px 0px 5px;
 }
 
-body > form#updateUser > div#result {
+body > div#updateUser > div#result {
     width: 100%;
     display: flex;
     position: relative;
     justify-content: flex-end;
     margin-top: 10px;
     left: 50%;
-    transform: translate(-50%);
+    transdiv: translate(-50%);
     flex-wrap: wrap;
     padding: 3px;
 }
 
-body > form#updateUser > div#result > table#viewResult {
+body > div#updateUser > div#result > table#viewResult {
     width: 100%;
     padding: 3px;
 }
 
-body > form#updateUser > div#result > div#buttArea {
+body > div#updateUser > div#result > div#buttArea {
     float: right;
     padding: 3px;
 }
 
-body > form#updateUser > div#result > div#buttArea > input.btn {
+body > div#updateUser > div#result > div#buttArea > input.btn {
     background-color: lightgray !important;
     width: 70px;
     border: 1px solid dimgray;
 }
 
-body > form#updateUser > div#result > div#buttArea > input.btn:last-child {
+body > div#updateUser > div#result > div#buttArea > input.btn:last-child {
     background-color: dimgray !important;
 }

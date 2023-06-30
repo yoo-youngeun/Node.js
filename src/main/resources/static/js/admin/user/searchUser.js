@@ -51,7 +51,6 @@ $(function() {
             .then((response) => {
                 if (response.data.length == 0) {
                     alert("검색 결과가 없습니다.");
-                    searchUsers();
                 } else {
                     alert("검색결과 : " + response.data.length + "건")
                     userList.userList = response.data;
