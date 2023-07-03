@@ -42,14 +42,11 @@ public class AdminController {
 
     @GetMapping("/hiddenForm")
     public String hiddenForm() {
-//        mv.setViewName("/html/admin/hiddenForm");
-//        return "/html/admin/iframe";
         return "/html/admin/hiddenForm";
     }
 
     @GetMapping("/user")
     public ModelAndView getUsers(ModelAndView mv) {
-//        mv.setViewName("/html/admin/users/searchUser.html");
         mv.setViewName("/html/admin/users/searchUser");
 
         return mv;

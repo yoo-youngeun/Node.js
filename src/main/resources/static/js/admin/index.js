@@ -9,13 +9,11 @@ $(function() {
     $(".menu").on("click", function () {
         let id = $(this).attr("id");
         let addr = id.substr(5);
+
         $(".menu").removeClass("active");
         $(".menu").css({"font-weight" : "lighter"});
 
         $("#" + id + "").addClass("active");
-        $("#" + id + "").css({
-            "font-weight" : "bold"
-        });
 
         $("#content").attr("src", "/am/" + addr);
     });

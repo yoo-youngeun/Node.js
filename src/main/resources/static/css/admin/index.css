@@ -28,6 +28,7 @@ body > div#wrap >div#menuWrap {
 .active {
     background-color: lightgray !important;
     border: .5px solid silver !important;
+    font-weight: bold !important;
 }
 
 body > div#wrap >div#contentWrap {
@@ -77,7 +78,17 @@ body > div#wrap >div#menuWrap >div#header > ul.list-group > li.menu {
 /*콘텐츠*/
 body > div#wrap >div#contentWrap > #tag {
     width: 100%;
+    display: flex;
+    justify-content: flex-end;
     height: 70px !important;
+}
+
+body > div#wrap >div#contentWrap > #tag > div#subMenu {
+    width: 160px;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 body > div#wrap >div#contentWrap > iframe#content {
