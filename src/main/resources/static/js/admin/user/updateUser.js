@@ -1,7 +1,7 @@
 'use strict';
-let userStatus;
 $(function() {
-    let url = $(location).attr('href').split("/")[5];
+    let userStatus;
+    let idx = $(location).attr('href').split("/")[5];
 
     let updateUser = new Vue({
         // el : 연결할 영역을 지정
@@ -20,14 +20,51 @@ $(function() {
                 $("#"+targetId+"").val(userStatus).prop("selected", true);
             },
             viewPage : function(url) {
-                // window.open(url, "_self", "width=860,height=600");
-                location.href = url;
+                window.open(url, "_self", "width=860,height=600");
             },
+            submitForm: function() {
+                if (checkParam()){
+                    let url = '/am/updateUser/'+ idx;
+
+                    let userid = $("#userid").val();
+                    let name = $("#name").val();
+                    let email = $("#email").val();
+                    let hp = $("#hp").val();
+                    let regDate = $("#regDate").val();
+                    let status = $("#statusList").val();
+
+                    const frm = new FormData();
+                    frm.append('userid', userid);
+                    frm.append('name', name);
+                    frm.append('email', email);
+                    frm.append('hp', hp);
+                    frm.append('regDate', regDate);
+                    frm.append('status', status);
+
+                    axios.post(url, frm)
+                        .then((response) => {
+                            // console.dir(response);
+                            let userid = response.data;
+                            if (userid != "" && userid != null && userid.length != 0) {
+                                location.href = '/am/searchUser/'+idx;
+                                alert("수정 완료");
+                                // 부모창 유저 리스트 다시 로드
+                                opener.document.getElementById("reset").click();
+                            } else {
+                                alert("수정 실패");
+                            }
+                        })
+                        .catch((error) => {
+                            // 예외 처리
+                            console.dir(error);
+                        });
+                }
+            }
         },
         mounted() {
 
         },
-        updated() { // 데이터가 변경되어 가상 DOM이 다시 렌더링되고 패치된 후에 호출된다.
+        updated() { // 데이터가 변경되어 가상 DOM이 다시 렌더링되고 패치된 후 호출
             $("#statusList").trigger("click");
         }
     });
@@ -36,18 +73,19 @@ $(function() {
 
     getStatus();
 
-    function searchUsers() {
+    /* 사용자 정보 리턴 */
+    function searchUser() {
         axios({
-            url: '/am/user/'+url, // 통신할 웹문서
+            url: '/am/user/'+idx, // 통신할 웹문서
             method: 'get' // 통신 방식
         }).then(function (response) {
             // console.dir(response.data);
             updateUser.user = response.data;
-
             userStatus = updateUser.user.status;
         });
     }
-    
+
+    /* 상태값 리스트 리턴 */
     function getStatus() {
         axios({
             url: '/am/getStatusList', // 통신할 웹문서
@@ -56,24 +94,8 @@ $(function() {
             // console.dir(response.data);
             updateUser.statusList = response.data;
 
-            searchUsers();
+            searchUser();
         });
-    }
-
-    function update() {
-        alert("update 실행");
-        let check = false;
-
-        if (checkParam()) {
-            check = true;
-        } else {
-            check = false;
-        }
-        if (check) {
-            location.href = "/am/viewPage/"+url;
-        }
-
-        return check;
     }
 
     /* Button 영역 시작*/

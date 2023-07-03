@@ -13,7 +13,7 @@ $(function() {
         },
         methods: {
             viewPage : function(url) {
-                window.open(url, "_blank", "width=860,height=600");
+                window.open(url, "_target", "width=860,height=600");
             }
         }
     });
@@ -25,7 +25,7 @@ $(function() {
             url: '/am/searchUsers', // 통신할 웹문서
             method: 'get' // 통신 방식
         }).then(function (response) {
-            console.dir(response.data);
+            // console.dir(response.data);
             userList.userList = response.data;
         });
     }

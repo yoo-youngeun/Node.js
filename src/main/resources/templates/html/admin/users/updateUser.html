@@ -10,13 +10,10 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="/css/admin/user/updateUser.css">
     <link rel="stylesheet" href="/css/admin/index.css">
-    <script defer>
-        console.log($("#statusList"));
-    </script>
 </head>
 <body>
-    <div id="updateUser" method="post" >
-        <form :action=`/am/updateUser/${user.id}`>
+    <div id="updateUser">
+        <form @submit.prevent="submitForm">
         <div id="title">회원정보수정<hr></div>
         <div id="result">
             <table id="viewResult" class="table table-striped-columns table-hover">
@@ -43,14 +40,14 @@
                     <td><input type="text" name="regDate" id="regDate" v-model="user.regDate.substring(0,10)" readonly></td>
                     <th>상태</th>
                     <td>
-                        <select id="statusList" v-on:click.once="[checkStatus(`${user.status}`), select($event)]" ref="selectState">
-                            <option v-for="state in statusList" v-model="state" name="state" :id="state">{{state}}</option>
+                        <select id="statusList" name="state" v-on:click.once="[checkStatus(`${user.status}`), select($event)]" ref="selectState">
+                            <option v-for="state in statusList" v-model="state" :id="state">{{state}}</option>
                         </select>
                     </td>
                 </tr>
             </table>
             <div id="buttArea">
-                <input type="submit" id="update" onsubmit="update()" class="btn btn-primary" value="수정">
+                <input type="submit" id="update" class="btn btn-primary" value="수정">
                 <input type="button" id="close" v-on:click=viewPage(`/am/searchUser/${user.id}`) class="btn btn-primary" value="취소">
             </div>
         </div>

@@ -24,7 +24,7 @@ $(function() {
             url: '/am/user/'+idx, // 통신할 웹문서
             method: 'get' // 통신 방식
         }).then(function (response) {
-            console.dir(response.data);
+            // console.dir(response.data);
             viewUser.user = response.data;
         });
     }

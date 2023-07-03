@@ -82,11 +82,11 @@ public class AdminController {
     public Optional<Users> getUser(@PathVariable("id") Long id) {
         Optional<Users> user = repository.findUsersById(id);
 
-        if(user.isPresent()) {
-            System.out.println("userid : " + user.get().getUserid());
-        } else{
-            System.out.println("없음");
-        }
+//        if(user.isPresent()) {
+//            System.out.println("userid : " + user.get().getUserid());
+//        } else{
+//            System.out.println("없음");
+//        }
         return user;
     }
 
@@ -96,21 +96,17 @@ public class AdminController {
         return mv;
     }
 
-    @GetMapping("/updateUser/{id}")
+    @PostMapping("/updateUser/{id}")
     @ResponseBody
-    public void updateUser(@PathVariable Long id, @RequestParam(required = false) Map<String, String> param) throws Exception {
-//        Users exUser = repository.findUsersByUserid(param.get("userid"));
-//        Users user = service.updateUser(param);
-
+    public String updateUser(@PathVariable Long id, @RequestParam(required = false) Map<String, String> param) throws Exception {
         System.out.println(param.get("userid")+param.get("email")+param.get("hp")+param.get("status"));
+        Users user = service.updateUser(param);
 
-//        if (user != null && exUser != null) {
-//            System.out.println("기존 userid ::: " + exUser.getUserid() + "변경된 userid ::: " + user.getStatus());
-//            System.out.println("기존 email ::: " + exUser.getEmail() + "변경된 email ::: " + user.getEmail());
-//            System.out.println("기존 status ::: " + exUser.getStatus() + "변경된 status ::: " + user.getStatus());
-//        } else {
-//            System.out.println("비엇서");
-//        }
+        if(user != null) {
+            return user.getUserid();
+        } else {
+            return "";
+        }
     }
 
     @GetMapping("/getStatusList")

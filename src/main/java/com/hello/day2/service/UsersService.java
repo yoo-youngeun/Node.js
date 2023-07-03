@@ -63,8 +63,8 @@ public class UsersService {
         try {
             if (user != null) {
                 user.setStatus(UserStatus.valueOf(param.get("status")));
-                user.setStatus(UserStatus.valueOf(param.get("hp")));
-                user.setStatus(UserStatus.valueOf(param.get("email")));
+                user.setHp(param.get("hp"));
+                user.setEmail(param.get("email"));
 
                 user = usersRepository.save(user);
             }
