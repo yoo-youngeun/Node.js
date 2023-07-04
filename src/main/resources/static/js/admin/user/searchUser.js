@@ -68,10 +68,13 @@ $(function() {
         searchUsers();
     })
 
-    // $(".viewLink").on("click", function() {
-    //     alert("dddd");
-    //     let url = $(this).next("td").text();
-    //     alert(url);
-    //     window.open(url, "width=1200,height=600");
-    // });
+    $("input#close").on("click", function() {
+        window.open('','_self').close();
+    })
+
+    $("#createUser").on("click", function() {
+        window.open("/am/createUserPage", '_target', "width=860,height=600");
+    })
+
+
 })

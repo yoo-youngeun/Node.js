@@ -22,7 +22,7 @@ body > div#searchUser > div#searchTab > form#frm {
 }
 
 body > div#searchUser > div#searchTab > form#frm > table#searchTable {
-    width: 85%;
+    width: 70%;
     height: 58.7px !important;
     margin: 0px;
     vertical-align: middle;
@@ -41,9 +41,10 @@ body > div#searchUser > div#searchTab > form#frm > table#searchTable > tr > th, 
 }
 
 body > div#searchUser > div#searchTab > form#frm > div#buttArea {
-    width: 170px;
+    width: 240px;
     display: flex;
     justify-content: space-around;
+    margin-right: 6px;
 }
 
 body > div#searchUser > div#searchTab > form#frm > div#buttArea > input.btn {
@@ -52,7 +53,7 @@ body > div#searchUser > div#searchTab > form#frm > div#buttArea > input.btn {
     border: 1px solid dimgray;
 }
 
-body > div#searchUser > div#searchTab > form#frm > div#buttArea > input.btn:last-child {
+body > div#searchUser > div#searchTab > form#frm > div#buttArea > input.btn:nth-child(even) {
     background-color: dimgray !important;
 }
 

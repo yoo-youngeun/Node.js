@@ -97,13 +97,20 @@ public class AdminController {
     @ResponseBody
     public String updateUser(@PathVariable Long id, @RequestParam(required = false) Map<String, String> param) throws Exception {
         System.out.println(param.get("userid")+param.get("email")+param.get("hp")+param.get("status"));
-        Users user = service.updateUser(param);
+        String userid = "";
 
-        if(user != null) {
-            return user.getUserid();
-        } else {
-            return "";
+        try {
+            Users user = service.updateUser(param);
+
+            if(user != null) {
+                userid = user.getUserid();
+            } else {
+                userid = "";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return userid;
     }
 
     @GetMapping("/getStatusList")
@@ -116,4 +123,27 @@ public class AdminController {
         }
         return statusList;
     }
+
+    @GetMapping("/createUserPage")
+    public ModelAndView createUserPage(){
+        ModelAndView mv = new ModelAndView("/html/admin/users/createUser");
+        return mv;
+    }
+
+    @GetMapping("/checkUserid")
+    @ResponseBody
+    public String checkUserid(@RequestParam String userid) throws Exception {
+        Users user = repository.findUsersByUserid(userid);
+        String checkUserid = "n";
+        try {
+            if (user == null) {
+                checkUserid = "y";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return checkUserid;
+    }
+
+
 }
