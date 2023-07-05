@@ -1,10 +1,13 @@
 package com.hello.day2.service;
 
+import com.hello.day2.enumclass.Gender;
 import com.hello.day2.enumclass.UserStatus;
 import com.hello.day2.model.entity.Users;
 import com.hello.day2.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -72,5 +75,29 @@ public class UsersService {
             e.printStackTrace();
         }
         return user;
+    }
+
+    public Users createUser(Map<String, String> param) {
+        String userid = param.get("userid");
+        String userpw = param.get("userpw");
+        String name = param.get("name");
+        String hp = param.get("hp");
+        String email = param.get("email");
+        Gender gender = Gender.valueOf(param.get("gender"));
+
+        Users user = Users.builder()
+                .userid(userid)
+                .userpw(userpw)
+                .name(name)
+                .hp(hp)
+                .email(email)
+                .gender(gender)
+                .status(UserStatus.REGISTERED)
+                .regDate(LocalDateTime.now())
+                .build();
+
+        Users newUser = usersRepository.save(user);
+
+        return newUser;
     }
 }

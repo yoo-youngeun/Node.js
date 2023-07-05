@@ -1,5 +1,6 @@
 package com.hello.day2.controller.admin;
 
+import com.hello.day2.enumclass.Gender;
 import com.hello.day2.enumclass.UserStatus;
 import com.hello.day2.model.entity.Users;
 import com.hello.day2.repository.UsersRepository;
@@ -79,11 +80,6 @@ public class AdminController {
     public Optional<Users> getUser(@PathVariable("id") Long id) {
         Optional<Users> user = repository.findUsersById(id);
 
-//        if(user.isPresent()) {
-//            System.out.println("userid : " + user.get().getUserid());
-//        } else{
-//            System.out.println("없음");
-//        }
         return user;
     }
 
@@ -115,7 +111,7 @@ public class AdminController {
 
     @GetMapping("/getStatusList")
     @ResponseBody
-    public List<UserStatus>getStatusList() {
+    public List<UserStatus> getStatusList() {
         UserStatus[] userStatuses = UserStatus.values();
         List<UserStatus> statusList = new ArrayList<>();
         for (int i = 0; i < userStatuses.length; i++) {
@@ -145,5 +141,22 @@ public class AdminController {
         return checkUserid;
     }
 
+    @GetMapping("/getGenderList")
+    @ResponseBody
+    public List<Gender> getGenderList() {
+        Gender[] genders = Gender.values();
+        List<Gender> genderList = new ArrayList<>();
+        for (int i = 0; i < genders.length; i++) {
+            genderList.add(genders[i]);
+        }
+        return genderList;
+    }
+
+    @GetMapping("/createUser")
+    public String createUser(@RequestParam(required = false) Map<String, String> param){
+        Users createUser = service.createUser(param);
+
+        return String.valueOf(createUser.getId());
+    }
 
 }

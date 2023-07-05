@@ -42,4 +42,6 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
 
     @Query("select distinct status from Users")
     List<String> findDistinctStatus();
+    @Query("select distinct gender from Users")
+    List<String> findDistinctGender();
 }

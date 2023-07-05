@@ -1,5 +1,6 @@
 package com.hello.day2.model.entity;
 
+import com.hello.day2.enumclass.Gender;
 import com.hello.day2.enumclass.UserStatus;
 import lombok.*;
 
@@ -21,6 +22,8 @@ public class Users {
     private String name;
     private String hp;
     private String email;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 //    @Convert(converter = UserStatusConverter.class)
     @Enumerated(EnumType.STRING)
     private UserStatus status; // REGISTERED, UNREGISTERED

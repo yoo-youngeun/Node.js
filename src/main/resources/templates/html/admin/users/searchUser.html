@@ -26,8 +26,7 @@
                         <col width="20%">
                     </colgroup>
                     <tr>
-                        <th>
-                            <div class="viewLink">아이디</div></th>
+                        <th><div class="viewLink">아이디</div></th>
                         <td><input type="text" name="userid" class="form-control" id="userid"></td>
                         <th>이름</th>
                         <td><input type="text" name="name" class="form-control" id="name"></td>
@@ -52,7 +51,8 @@
                 <colgroup>
                     <col width="15%">
                     <col width="10%">
-                    <col width="30%">
+                    <col width="20%">
+                    <col width="10%">
                     <col width="15%">
                     <col width="18%">
                     <col width="12%">
@@ -61,6 +61,7 @@
                     <th><div class="viewLink">아이디</div></th>
                     <th>이름</th>
                     <th>이메일</th>
+                    <th>성별</th>
                     <th>연락처</th>
                     <th>가입일</th>
                     <th>상태</th>
@@ -71,6 +72,7 @@
                     </td>
                     <td><div class="viewLink" v-on:click=viewPage(`/am/searchUser/${user.id}`)>{{user.name}}</div></td>
                     <td>{{user.email}}</td>
+                    <td>{{user.gender}}</td>
                     <td>{{user.hp}}</td>
                     <td>{{user.regDate.substring(0,10)}}</td>
                     <td>{{user.status}}</td>

@@ -1,3 +1,6 @@
+* {
+    position: relative;
+}
 body > div#createUser > form > div#title {
     display: block;
     width: 100%;
@@ -20,6 +23,18 @@ body > div#createUser > form > div#result {
 body > div#createUser > form > div#result > table#viewResult {
     width: 100%;
     padding: 3px;
+    table-layout: fixed;
+}
+
+body > div#createUser > form > div#result > table#viewResult input {
+    height: 27.56px;
+}
+
+body > div#createUser > form > div#result > table#viewResult tr
+body > div#createUser > form > div#result > table#viewResult th,
+body > div#createUser > form > div#result > table#viewResult td {
+    height: 49px !important;
+    vertical-align: middle;
 }
 
 body > div#createUser > form > div#result > div#buttArea {
@@ -53,6 +68,7 @@ input#checkId {
     color: forestgreen;
     font-size: 15px !important;
     font-weight: bolder;
+    border: none;
 }
 
 .checkIdFail {
@@ -63,13 +79,32 @@ input#checkId {
 
 .checkPw {
     display: none;
-    position: inherit;
-    height: 100%;
-    right: 0px;
+    height: 28px;
     color: forestgreen;
-    font-size: 11px;
+    margin-bottom: 0px;
+    font-size: 16px;
+    font-weight: bolder;
+    margin-left: 4px;
 }
 
 #checkPwF {
     color: red;
+}
+
+.msg {
+    display: none;
+    font-size: 8px;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 5px !important;
+    /*position: absolute;*/
+}
+
+input:focus {
+    border: 1px solid black;
+}
+
+input.borderRed:focus {
+    border: 1px solid red;
 }
