@@ -144,22 +144,22 @@ $(function() {
             } else {
                 showPopup(id);
             }
-            if (id == "userpw_re") {
-                if(userpw_re.val().length <= 0) {
-                    checkPwReset();
-                    checkPwFail();
+            if(userpw_re.val().length <= 0) {
+                checkPwReset();
+            } else {
+                if (userpw.val() == userpw_re.val() && userpw.val().length == userpw_re.val().length && isPw(userpw_re.val())) {
+                    checkPwSuccess();
+                    hidePopup(id);
                 } else {
-                    if (userpw.val() == userpw_re.val() && userpw.val().length == userpw_re.val().length && isPw(userpw_re.val())) {
-                        checkPwSuccess();
-                    } else {
-                        checkPwFail();
-                    }
+                    checkPwFail();
                 }
             }
-        } else {
-            hidePopup(id);
-            checkPwReset();
         }
+
+        //  else {
+        //     hidePopup(id);
+        //     checkPwReset();
+        // }
     }
     /* 비밀번호 keyup event 끝*/
 
