@@ -37,13 +37,13 @@
                         <input type="hidden" name="checkIdState" id="checkIdState" value="n">
                     </td>
                     <th>이름</th>
-                    <td><input type="text" name="name" id="name"></td>
+                    <td><input type="text" name="name" id="name" placeholder="한글 2자 ~ 8자" ></td>
                 </tr>
                 <tr>
                     <th>비밀번호</th>
                     <td class="pwCheckWrap">
                         <div class="tdPwCheck">
-                            <input type="password" name="userpw" id="userpw" @keyup="resetCheckPw($event)">
+                            <input type="password" placeholder="영문 + 숫자 + 특수문자 6자 ~ 20자" name="userpw" id="userpw" @keyup="resetCheckPw($event)">
                             <input type="hidden" name="checkPwState" id="checkPwState" value="n">
                         </div>
                         <span class="msg msgCheckPw">영문 + 숫자 + 특수문자 6자 ~ 20자</span>
@@ -51,7 +51,7 @@
                     <th>비밀번호 확인</th>
                     <td class="pwCheckWrap">
                         <div class="tdPwCheck">
-                            <input type="password" name="userpw_re" id="userpw_re" @keyup="resetCheckPw($event)">
+                            <input type="password" placeholder="영문 + 숫자 + 특수문자 6자 ~ 20자" name="userpw_re" id="userpw_re" @keyup="resetCheckPw($event)">
                             <p class="checkPw" id="checkPwS">✔️</p><p class="checkPw" id="checkPwF">Ⅹ</p>
                         </div>
                         <span class="msg msgCheckPw">영문 + 숫자 + 특수문자 6자 ~ 20자</span>

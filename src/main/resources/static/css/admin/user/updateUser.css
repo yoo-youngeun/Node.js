@@ -36,3 +36,9 @@ body > div#updateUser > form > div#result > div#buttArea > input.btn {
 body > div#updateUser > form > div#result > div#buttArea > input.btn:last-child {
     background-color: dimgray !important;
 }
+
+input:read-only {
+    background-color: lightgray;
+    opacity: 0.7;
+    border: 1px solid dimgray;
+}

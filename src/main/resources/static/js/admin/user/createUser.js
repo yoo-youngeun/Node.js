@@ -81,11 +81,7 @@ $(function() {
                     let userpw = $("#userpw").val();
                     let genderList = $("input[name='gender']");
                     let gender = "";
-                    genderList.each(function () {
-                        if($(this).is(":checked")){
-                            gender = $(this).val();
-                        }
-                    })
+                    genderList.each(function() {if($(this).is(":checked")){gender = $(this).val();}})
                     let name = $("#name").val();
                     let email = $("#email").val();
                     let hp = $("#hp").val();
@@ -264,7 +260,7 @@ $(function() {
     }
 
     function isName(asValue) {
-        const regExp = /^[가-힣]{2,5}$/;
+        const regExp = /^[가-힣]{2,8}$/;
         return regExp.test(asValue);
     }
 
