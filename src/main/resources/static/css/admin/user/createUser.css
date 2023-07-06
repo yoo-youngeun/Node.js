@@ -121,3 +121,7 @@ input:focus {
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
+input::placeholder {
+    font-size: 12px;
+}

@@ -9,71 +9,13 @@ $(function() {
             genderList : {}
         },
         methods : {
-            resetCheckId: function(event) {
-                checkIdFail();
-
-                let id = event.currentTarget.id;
-                let targetid = $("#userid")
-                let pw = $("#userpw")
-                // let width = $("table#viewResult td").width();
-
+            resetCheckPw: function(event) { // 비밀번호 형식 체크
+                checkPw(event);
             },
-            checkId: function() {
-                let userid = $("#userid");
-                if (userid.val().length != 0) {
-                    if (isId(userid.val())) {
-                        let url = "/am/checkUserid?userid="+userid.val();
-                        axios.get(url)
-                            .then((response) => {
-                                let checkUserid = response.data;
-                                if (checkUserid == 'y' && checkUserid != 'n') {
-                                    alert("사용 가능한 아이디입니다.");
-                                    checkIdSuccess();
-                                } else {
-                                    alert("사용 불가능한 아이디입니다.");
-                                    checkIdFail();
-                                }
-                            })
-                    } else {
-                        alert("아이디 형식을 확인하세요.");
-                        userid.focus();
-                    }
-                } else {
-                    alert("아이디를 입력하세요.");
-                    userid.focus();
-                }
+            checkId: function() { // 아이디 중복 확인
+                checkId();
             },
-            resetCheckPw: function(event) {
-                let id = event.currentTarget.id;
-
-                let userpw = $("#userpw");
-                let userpw_re = $("#userpw_re");
-                let obj = $("#"+id);
-
-                if (obj.val().length > 0) {
-                    if (isPw(obj.val())) {
-                        hidePopup(id);
-                    } else {
-                        showPopup(id);
-                    }
-                    if (id == "userpw_re") {
-                        if(userpw_re.val().length <= 0) {
-                            checkPwReset();
-                            checkPwFail();
-                        } else {
-                            if (userpw.val() == userpw_re.val() && userpw.val().length == userpw_re.val().length && isPw(userpw_re.val())) {
-                                checkPwSuccess();
-                            } else {
-                                checkPwFail();
-                            }
-                        }
-                    }
-                } else {
-                    hidePopup(id);
-                    checkPwReset();
-                }
-            },
-            submitForm: function() {
+            submitForm: function() { // 유저 등록
                 if (checkParam()){
                     let url = '/am/createUser/';
 
@@ -117,28 +59,11 @@ $(function() {
 
         },
         updated() { // 데이터가 변경되어 가상 DOM이 다시 렌더링되고 패치된 후 호출
-            let i = $("input[name='gender']").first().prop("checked", true);
+            $("input[name='gender']").first().prop("checked", true); // 첫번째 성별 체크
         }
     });
 
-    function showPopup(id) {
-        let msg = $("#"+id).parent().next();
-        if (msg != null) {
-            if (id == "userid" || id == "userpw" || id == "userpw_re") {
-                msg.css("display", "inline-block");
-            }
-        }
-    }
-
-    function hidePopup(id) {
-        let msg = $("#"+id).parent().next("span");
-        if (msg != null) {
-            if (id == "userid" || id == "userpw" || id == "userpw_re") {
-                msg.css("display", "none");
-            }
-        }
-    }
-
+    /* gender list 가져와 select option 추가 시작 */
     getGender();
 
     function getGender() {
@@ -152,14 +77,94 @@ $(function() {
                 console.dir(error);
             });
     }
+    /* gender list select option 추가 끝 */
+    
+    /* 비밀번호 형식 메시지 - show, hide 시작*/
+    // 비밀번호 형식 메시지 - show
+    function showPopup(id) {
+        let msg = $("#"+id).parent().next();
+        if (msg != null) {
+            if (id == "userid" || id == "userpw" || id == "userpw_re") {
+                msg.css("display", "inline-block");
+            }
+        }
+    }
 
-    /* Button 영역 시작*/
-    $("input#close").on("click", function() {
-        window.open('','_self').close();
-    })
+    // 비밀번호 형식 메시지 - hide
+    function hidePopup(id) {
+        let msg = $("#"+id).parent().next("span");
+        if (msg != null) {
+            if (id == "userid" || id == "userpw" || id == "userpw_re") {
+                msg.css("display", "none");
+            }
+        }
+    }
+    /*비밀번호 형식 메시지 - show, hide 끝*/
 
-    /* Button 영역 끝*/
 
+    /* 아이디 중복확인 시작 */
+    function checkId() {
+        let userid = $("#userid");
+        if (userid.val().length != 0) {
+            if (isId(userid.val())) {
+                let url = "/am/checkUserid?userid="+userid.val();
+                axios.get(url)
+                    .then((response) => {
+                        let checkUserid = response.data;
+                        if (checkUserid == 'y' && checkUserid != 'n') {
+                            alert("사용 가능한 아이디입니다.");
+                            checkIdSuccess();
+                        } else {
+                            alert("사용 불가능한 아이디입니다.");
+                            checkIdFail();
+                        }
+                    })
+            } else {
+                alert("아이디 형식을 확인하세요.");
+                userid.focus();
+            }
+        } else {
+            alert("아이디를 입력하세요.");
+            userid.focus();
+        }
+    }
+    /* 아이디 중복확인 끝 */
+
+    /* 비밀번호 keyup event 시작*/
+    function checkPw(evnet) {
+        let id = event.currentTarget.id;
+
+        let userpw = $("#userpw");
+        let userpw_re = $("#userpw_re");
+        let obj = $("#"+id);
+
+        if (obj.val().length > 0) {
+            if (isPw(obj.val())) {
+                hidePopup(id);
+            } else {
+                showPopup(id);
+            }
+            if (id == "userpw_re") {
+                if(userpw_re.val().length <= 0) {
+                    checkPwReset();
+                    checkPwFail();
+                } else {
+                    if (userpw.val() == userpw_re.val() && userpw.val().length == userpw_re.val().length && isPw(userpw_re.val())) {
+                        checkPwSuccess();
+                    } else {
+                        checkPwFail();
+                    }
+                }
+            }
+        } else {
+            hidePopup(id);
+            checkPwReset();
+        }
+    }
+    /* 비밀번호 keyup event 끝*/
+
+    /* id, 비밀번호 형식 체크여부 시작*/
+    // 아이디 체크 성공
     function checkIdSuccess() {
         $("#checkId").val("✔");
         $("#checkId").removeClass("checkIdFail");
@@ -167,6 +172,7 @@ $(function() {
         $("#checkIdState").val("y");
     }
 
+    // 아이디 체크 실패
     function checkIdFail() {
         $("#checkId").val("중복체크");
         $("#checkId").addClass("checkIdFail");
@@ -174,6 +180,7 @@ $(function() {
         $("#checkIdState").val("n");
     }
 
+    // 비밀번호 체크 성공
     function checkPwSuccess() {
         $("#checkPwS").css({
             "display" : "inline-block",
@@ -183,19 +190,22 @@ $(function() {
         $("#checkPwState").val("y");
     }
 
+    // 비밀번호 체크 실패
     function checkPwFail() {
         $("#checkPwF").css("display", "inline-block");
         $("#checkPwS").css("display", "none");
         $("#checkPwState").val("n");
     }
 
+    // 비밀번호 체크 초기화
     function checkPwReset() {
         $("#checkPwF").css("display", "none");
         $("#checkPwS").css("display", "none");
         $("#checkPwState").val("n");
     }
+    /* id, 비밀번호 형식 체크여부 표시 끝*/
 
-    /* parameter check */
+    /* parameter check 시작 */
     function checkParam() {
         let checkIdState = $("input#checkIdState").val();
         let checkPwState = $("input#checkPwState").val();
@@ -251,6 +261,13 @@ $(function() {
 
         return true;
     }
+    /* parameter check 끝 */
+    
+    /* Button 영역 시작*/
+    $("input#close").on("click", function() {
+        window.open('','_self').close();
+    })
+    /* Button 영역 끝*/
 
     /* 정규식 시작 */
     // 아이디 정규식
