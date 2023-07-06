@@ -22,7 +22,7 @@ public class AdminCateController {
 
     @GetMapping("")
     public ModelAndView index(ModelAndView mv) {
-        mv.setViewName("/html/admin/index");
+        mv.setViewName("/html/admin/cate/searchCate");
         return mv;
     }
 
@@ -32,11 +32,6 @@ public class AdminCateController {
         return mv;
     }
 
-    @GetMapping("/user")
-    public ModelAndView getUsers(ModelAndView mv) {
-        mv.setViewName("/html/admin/users/searchUser");
-        return mv;
-    }
 
     @GetMapping("/searchUsers")
     @ResponseBody

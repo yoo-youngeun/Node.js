@@ -10,12 +10,12 @@ $(function() {
     // Menu 클릭 시 이벤트
     $(".menu").bind("click", function () {
         let id = $(this).attr("id");
-        let addr = id.substr(5);
+        let menu = id.substr(5).replace("_","/");
         $(".menu").removeClass("active");
         $(".menu").css({"font-weight" : "lighter"});
 
         $("#" + id + "").addClass("active");
-        $("#content").attr("src", "/am/users/" + addr);
+        $("#content").attr("src", "/am/" + menu);
     });
 });
 
