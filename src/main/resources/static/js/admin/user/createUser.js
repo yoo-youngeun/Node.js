@@ -108,8 +108,7 @@ $(function() {
         if (userid.val().length != 0) {
             if (isId(userid.val())) {
                 let url = "/am/checkUserid?userid="+userid.val();
-                axios.get(url)
-                    .then((response) => {
+                axios.get(url).then((response) => {
                         let checkUserid = response.data;
                         if (checkUserid == 'y' && checkUserid != 'n') {
                             alert("사용 가능한 아이디입니다.");
@@ -118,7 +117,7 @@ $(function() {
                             alert("사용 불가능한 아이디입니다.");
                             checkIdFail();
                         }
-                    })
+                })
             } else {
                 alert("아이디 형식을 확인하세요.");
                 userid.focus();

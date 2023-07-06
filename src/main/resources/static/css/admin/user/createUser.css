@@ -1,6 +1,7 @@
 * {
     position: relative;
 }
+
 body > div#createUser > form > div#title {
     display: block;
     width: 100%;

@@ -23,33 +23,19 @@ public class AdminController {
 
     @GetMapping("")
     public ModelAndView index(ModelAndView mv) {
-//        mv.setViewName("/html/admin/index.html");
         mv.setViewName("/html/admin/index");
-        return mv;
-    }
-
-    @GetMapping("/iframe")
-    public ModelAndView iframe(ModelAndView mv) {
-        mv.setViewName("/html/admin/iframe");
         return mv;
     }
 
     @GetMapping("/home")
     public ModelAndView home(ModelAndView mv) {
-//        ModelAndView mv = new ModelAndView();
         mv.setViewName("/html/admin/home");
         return mv;
-    }
-
-    @GetMapping("/hiddenForm")
-    public String hiddenForm() {
-        return "/html/admin/hiddenForm";
     }
 
     @GetMapping("/user")
     public ModelAndView getUsers(ModelAndView mv) {
         mv.setViewName("/html/admin/users/searchUser");
-
         return mv;
     }
 
@@ -79,7 +65,6 @@ public class AdminController {
     @ResponseBody
     public Optional<Users> getUser(@PathVariable("id") Long id) {
         Optional<Users> user = repository.findUsersById(id);
-
         return user;
     }
 
@@ -94,7 +79,6 @@ public class AdminController {
     public String updateUser(@PathVariable Long id, @RequestParam(required = false) Map<String, String> param) throws Exception {
         System.out.println(param.get("userid")+param.get("email")+param.get("hp")+param.get("status"));
         String userid = "";
-
         try {
             Users user = service.updateUser(param);
 
@@ -156,7 +140,6 @@ public class AdminController {
     @ResponseBody
     public String createUser(@RequestParam(required = false) Map<String, String> param){
         Users createUser = service.createUser(param);
-
         return String.valueOf(createUser.getId());
     }
 
