@@ -4,20 +4,18 @@ $(function() {
     let menu = $("#menu_order").height() * 5;
     let lastMenu = height - menu;
     $(".list-group-item:last-child").css({"height" : lastMenu});
-    console.log($(".menu").first());
 
-    $(".menu").first().trigger("click", true);
+    $("#content").attr("src", "/am/users/home");
 
     // Menu 클릭 시 이벤트
-    $(".menu").on("click", function () {
+    $(".menu").bind("click", function () {
         let id = $(this).attr("id");
-        alert(id);
         let addr = id.substr(5);
         $(".menu").removeClass("active");
         $(".menu").css({"font-weight" : "lighter"});
 
         $("#" + id + "").addClass("active");
-        $("#content").attr("src", "/am/" + addr);
+        $("#content").attr("src", "/am/users/" + addr);
     });
 });
 

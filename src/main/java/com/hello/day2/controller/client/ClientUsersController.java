@@ -4,15 +4,13 @@ import com.hello.day2.model.entity.Users;
 import com.hello.day2.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/ci")
-public class UsersController {
+@RequestMapping("/ci/Users")
+public class ClientUsersController {
     @Autowired
     private UsersRepository usersRepository;
 

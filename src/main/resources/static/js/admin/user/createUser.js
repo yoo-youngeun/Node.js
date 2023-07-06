@@ -17,7 +17,7 @@ $(function() {
             },
             submitForm: function() { // 유저 등록
                 if (checkParam()){
-                    let url = '/am/createUser/';
+                    let url = '/am/users/createUser/';
 
                     let userid = $("#userid").val();
                     let userpw = $("#userpw").val();
@@ -41,7 +41,7 @@ $(function() {
                             let userid = response.data;
                             if (userid != null) {
                                 alert("등록 완료");
-                                location.href = '/am/searchUser/'+userid;
+                                location.href = '/am/users/searchUser/'+userid;
                                 // 부모창 유저 리스트 다시 로드
                                 opener.document.getElementById("reset").click();
                             } else {
@@ -67,7 +67,7 @@ $(function() {
     getGender();
 
     function getGender() {
-        axios.get("/am/getGenderList")
+        axios.get("/am/users/getGenderList")
             .then((response) => {
                 // console.dir(response.data);
                 createUser.genderList = response.data;
@@ -107,7 +107,7 @@ $(function() {
         let userid = $("#userid");
         if (userid.val().length != 0) {
             if (isId(userid.val())) {
-                let url = "/am/checkUserid?userid="+userid.val();
+                let url = "/am/users/checkUserid?userid="+userid.val();
                 axios.get(url).then((response) => {
                         let checkUserid = response.data;
                         if (checkUserid == 'y' && checkUserid != 'n') {

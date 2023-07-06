@@ -13,8 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.*;
 
 @Controller
-@RequestMapping("/am")
-public class AdminController {
+@RequestMapping("/am/users")
+public class AdminUsersController {
     @Autowired
     private UsersService service;
 
@@ -46,6 +46,12 @@ public class AdminController {
         return usersList;
     }
 
+    @GetMapping("/searchUsers/top")
+    @ResponseBody
+    public List<Users> searchUsersTop() {
+        List<Users> usersList = service.searchUsersTop();
+        return usersList;
+    }
 
     @PostMapping("/searchUser")
     @ResponseBody
@@ -53,7 +59,6 @@ public class AdminController {
         List<Users> usersList = service.searchUser(param);
         return usersList;
     }
-
 
     @GetMapping("/searchUser/{id}")
     public ModelAndView viewPage(@PathVariable String id) {

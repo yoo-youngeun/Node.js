@@ -22,7 +22,7 @@ $(function() {
 
     function searchUsers() {
         axios({
-            url: '/am/searchUsers', // 통신할 웹문서
+            url: '/am/users/searchUsers', // 통신할 웹문서
             method: 'get' // 통신 방식
         }).then(function (response) {
             // console.dir(response.data);
@@ -47,7 +47,7 @@ $(function() {
         frm.append('name', name);
         frm.append('status', status);
 
-        axios.post('/am/searchUser', frm)
+        axios.post('/am/users/searchUser', frm)
             .then((response) => {
                 if (response.data.length == 0) {
                     alert("검색 결과가 없습니다.");
@@ -73,7 +73,7 @@ $(function() {
     })
 
     $("#createUser").on("click", function() {
-        window.open("/am/createUserPage", '_target', "width=860,height=600");
+        window.open("/am/users/createUserPage", '_target', "width=860,height=600");
     })
 
 

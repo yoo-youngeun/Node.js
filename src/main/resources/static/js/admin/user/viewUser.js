@@ -21,7 +21,7 @@ $(function() {
 
     function searchUsers() {
         axios({
-            url: '/am/user/'+idx, // 통신할 웹문서
+            url: '/am/users/user/'+idx, // 통신할 웹문서
             method: 'get' // 통신 방식
         }).then(function (response) {
             // console.dir(response.data);
@@ -34,6 +34,6 @@ $(function() {
     })
 
     $("input#update").on("click", function() {
-        location.href="/am/updatePage/"+idx;
+        location.href="/am/users/updatePage/"+idx;
     })
 })

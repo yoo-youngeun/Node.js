@@ -17,40 +17,54 @@
 </div>
 <div id="container">
     <div id="userTab" class="tab">
+        <div id="title_user" class="title">신규 회원</div>
         <table id="userTable" class="table table-border">
             <colgroup>
+                <col width="30%">
+                <col width="30%">
+                <col width="40%">
             </colgroup>
             <tr>
-                <th><div class="viewLink">아이디</div></th>
-                <td><input type="text" name="userid" class="form-control" id="userid"></td>
+                <th>아이디</th>
                 <th>이름</th>
-                <td><input type="text" name="name" class="form-control" id="name"></td>
-                <th>가입상태</th>
+                <th>가입일</th>
+            </tr>
+            <tr v-for="user in userList">
+                <td>{{user.userid}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.regDate.substring(0,10)}}</td>
             </tr>
         </table>
+        <a href="/am/users/user" class="moreLink">more</a>
     </div>
     <div id="orderTab" class="tab">
+        <div id="title_order" class="title">신규 주문</div>
         <table id="orderTable" class="table table-border">
             <colgroup>
             </colgroup>
 
         </table>
+        <a href="" class="moreLink"></a>
     </div>
     <div id="itemTab" class="tab">
+        <div id="title_item" class="title">신규 아이템</div>
         <table id="itemTable" class="table table-border">
             <colgroup>
             </colgroup>
 
         </table>
+        <a href="" class="moreLink"></a>
     </div>
     <div id="partnerTab" class="tab">
-    <table id="partnerTable" class="table table-border">
-        <colgroup>
-        </colgroup>
+        <div id="title_partner" class="title">신규 파트너사</div>
+        <table id="partnerTable" class="table table-border">
+            <colgroup>
+            </colgroup>
 
-    </table>
+        </table>
+        <a href="" class="moreLink"></a>
+    </div>
 </div>
-</div>
-<script src="/js/admin/user/searchUser.js" /></script>
+<script src="/js/admin/home.js" /></script>
 </body>
 </html>

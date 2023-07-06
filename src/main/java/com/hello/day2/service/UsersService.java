@@ -23,6 +23,11 @@ public class UsersService {
         return userList;
     }
 
+    public List<Users> searchUsersTop() {
+        List<Users> userList = usersRepository.findTop5ByOrderByRegDateDesc();
+        return userList;
+    }
+
     public List<Users> searchUser(Map<String, String> param) {
         String userid = param.get("userid").trim();
         String name = param.get("name").trim();

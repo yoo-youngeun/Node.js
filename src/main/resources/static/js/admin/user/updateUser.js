@@ -24,7 +24,7 @@ $(function() {
             },
             submitForm: function() {
                 if (checkParam()){
-                    let url = '/am/updateUser/'+ idx;
+                    let url = '/am/users/updateUser/'+ idx;
 
                     let userid = $("#userid").val();
                     let name = $("#name").val();
@@ -46,7 +46,7 @@ $(function() {
                             // console.dir(response);
                             let userid = response.data;
                             if (userid != "" && userid != null && userid.length != 0) {
-                                location.href = '/am/searchUser/'+idx;
+                                location.href = '/am/users/searchUser/'+idx;
                                 alert("수정 완료");
                                 // 부모창 유저 리스트 다시 로드
                                 opener.document.getElementById("reset").click();
@@ -76,7 +76,7 @@ $(function() {
     /* 사용자 정보 리턴 */
     function searchUser() {
         axios({
-            url: '/am/user/'+idx, // 통신할 웹문서
+            url: '/am/users/user/'+idx, // 통신할 웹문서
             method: 'get' // 통신 방식
         }).then(function (response) {
             // console.dir(response.data);
@@ -88,7 +88,7 @@ $(function() {
     /* 상태값 리스트 리턴 */
     function getStatus() {
         axios({
-            url: '/am/getStatusList', // 통신할 웹문서
+            url: '/am/users/getStatusList', // 통신할 웹문서
             method: 'get' // 통신 방식
         }).then(function (response) {
             // console.dir(response.data);
@@ -104,7 +104,7 @@ $(function() {
     })
 
     $("input#update").on("click", function() {
-        location.href="/am/searchUser/";
+        location.href="/am/users/searchUser/";
     })
     /* Button 영역 끝*/
 
