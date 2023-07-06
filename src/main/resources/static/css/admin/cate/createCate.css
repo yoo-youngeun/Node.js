@@ -1,0 +1,128 @@
+* {
+    position: relative;
+}
+
+body > div#createCate > form > div#title {
+    display: block;
+    width: 100%;
+    height: 45px;
+    padding: 3px 0px 0px 5px;
+}
+
+body > div#createCate > form > div#result {
+    width: 100%;
+    display: flex;
+    position: relative;
+    justify-content: flex-end;
+    margin-top: 10px;
+    left: 50%;
+    transform: translate(-50%);
+    flex-wrap: wrap;
+    padding: 3px;
+}
+
+body > div#createCate > form > div#result > table#viewResult {
+    width: 100%;
+    padding: 3px;
+    table-layout: fixed;
+}
+
+body > div#createCate > form > div#result > table#viewResult input {
+    height: 27.56px;
+}
+
+body > div#createCate > form > div#result > table#viewResult tr
+body > div#createCate > form > div#result > table#viewResult th,
+body > div#createCate > form > div#result > table#viewResult td {
+    height: 49px !important;
+    vertical-align: middle;
+}
+
+body > div#createCate > form > div#result > div#buttArea {
+    float: right;
+    padding: 3px;
+    width: 230px;
+}
+
+body > div#createCate > form > div#result > div#buttArea > input.btn {
+    background-color: lightgray !important;
+    width: 70px;
+    border: 1px solid dimgray;
+}
+
+body > div#createCate > form > div#result > div#buttArea > input.btn:nth-child(even) {
+    background-color: dimgray !important;
+}
+
+input#checkId {
+    background-color: lightgray;
+    width: 55px;
+    height: 30px;
+    border: 1px solid dimgray;
+    font-size: 12px;
+    color: #333333;
+    padding: 0px;
+    font-weight: lighter;
+}
+
+.checkIdSuccess {
+    color: forestgreen;
+    font-size: 15px !important;
+    font-weight: bolder;
+    border: none;
+}
+
+.checkIdFail {
+    color: #333333;
+    font-size: 12px;
+    font-weight: lighter;
+}
+
+.checkPw {
+    display: none;
+    height: 28px;
+    color: forestgreen;
+    margin-bottom: 0px;
+    font-size: 16px;
+    font-weight: bolder;
+    margin-left: 4px;
+}
+
+#checkPwF {
+    color: red;
+}
+
+.msg {
+    display: none;
+    font-size: 8px;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 5px !important;
+    /*position: absolute;*/
+}
+
+input:focus {
+    border: 1px solid black;
+}
+
+.borderRed:focus {
+    border: 1px solid red;
+}
+
+.pwCheckWrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between
+}
+
+.tdPwCheck {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+input::placeholder {
+    font-size: 12px;
+}
