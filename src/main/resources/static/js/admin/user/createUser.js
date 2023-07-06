@@ -155,11 +155,6 @@ $(function() {
                 }
             }
         }
-
-        //  else {
-        //     hidePopup(id);
-        //     checkPwReset();
-        // }
     }
     /* 비밀번호 keyup event 끝*/
 
