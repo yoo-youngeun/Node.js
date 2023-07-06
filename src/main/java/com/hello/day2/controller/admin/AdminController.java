@@ -152,7 +152,8 @@ public class AdminController {
         return genderList;
     }
 
-    @GetMapping("/createUser")
+    @PostMapping("/createUser")
+    @ResponseBody
     public String createUser(@RequestParam(required = false) Map<String, String> param){
         Users createUser = service.createUser(param);
 

@@ -1,25 +1,6 @@
 'use strict';
 
 $(function() {
-    // let id = $("#userid")
-    // let pw = $("#userpw")
-    // let width = Number($(".msg").width())+30;
-    // let height = Number(id.height());
-    //
-    // let topId = Number(id.offset().top) + Number(height);
-    // let leftId = Number(id.offset().left);
-    // let topPw = Number(pw.offset().top) + Number(height);
-    // let leftPw = Number(pw.offset().left);
-
-    // $("span#msgCheckId").offset({
-    //     "top" : topId,
-    //     "left" : leftId
-    // })
-    // $("span#msgCheckPw").offset({
-    //     "top" : topPw,
-    //     "left" : leftPw
-    // })
-
     let createUser = new Vue({
         // el : 연결할 영역을 지정
         el : "#createUser",
@@ -32,7 +13,6 @@ $(function() {
                 checkIdFail();
 
                 let id = event.currentTarget.id;
-                alert("resetCheckId::"+id);
                 let targetid = $("#userid")
                 let pw = $("#userpw")
                 // let width = $("table#viewResult td").width();
@@ -40,43 +20,57 @@ $(function() {
             },
             checkId: function() {
                 let userid = $("#userid");
-                if (isId(userid.val())) {
-                    let url = "/am/checkUserid?userid="+userid.val();
-                    axios.get(url)
-                        .then((response) => {
-                            let checkUserid = response.data;
-                            if (checkUserid == 'y' && checkUserid != 'n') {
-                                alert("사용 가능한 아이디입니다.");
-                                checkIdSuccess();
-                            } else {
-                                alert("사용 불가능한 아이디입니다.");
-                                checkIdFail();
-                            }
-                        })
+                if (userid.val().length != 0) {
+                    if (isId(userid.val())) {
+                        let url = "/am/checkUserid?userid="+userid.val();
+                        axios.get(url)
+                            .then((response) => {
+                                let checkUserid = response.data;
+                                if (checkUserid == 'y' && checkUserid != 'n') {
+                                    alert("사용 가능한 아이디입니다.");
+                                    checkIdSuccess();
+                                } else {
+                                    alert("사용 불가능한 아이디입니다.");
+                                    checkIdFail();
+                                }
+                            })
+                    } else {
+                        alert("아이디 형식을 확인하세요.");
+                        userid.focus();
+                    }
                 } else {
-                    alert("아이디 형식을 확인하세요.");
+                    alert("아이디를 입력하세요.");
                     userid.focus();
                 }
             },
             resetCheckPw: function(event) {
                 let id = event.currentTarget.id;
 
-                alert("resetCheckPw::"+id);
                 let userpw = $("#userpw");
                 let userpw_re = $("#userpw_re");
-                if (userpw.val().length != 0) {
-                    if (isPw(userpw.val())) {
+                let obj = $("#"+id);
+
+                if (obj.val().length > 0) {
+                    if (isPw(obj.val())) {
                         hidePopup(id);
-                        if (userpw.val() == userpw_re.val()) {
-                            checkPwSuccess();
-                        } else {
-                            checkPwFail();
-                        }
                     } else {
                         showPopup(id);
                     }
+                    if (id == "userpw_re") {
+                        if(userpw_re.val().length <= 0) {
+                            checkPwReset();
+                            checkPwFail();
+                        } else {
+                            if (userpw.val() == userpw_re.val() && userpw.val().length == userpw_re.val().length && isPw(userpw_re.val())) {
+                                checkPwSuccess();
+                            } else {
+                                checkPwFail();
+                            }
+                        }
+                    }
                 } else {
                     hidePopup(id);
+                    checkPwReset();
                 }
             },
             submitForm: function() {
@@ -85,8 +79,13 @@ $(function() {
 
                     let userid = $("#userid").val();
                     let userpw = $("#userpw").val();
-                    let gender = $("input[name='gender']").is(":selected").val();
-                    alert(gender);
+                    let genderList = $("input[name='gender']");
+                    let gender = "";
+                    genderList.each(function () {
+                        if($(this).is(":checked")){
+                            gender = $(this).val();
+                        }
+                    })
                     let name = $("#name").val();
                     let email = $("#email").val();
                     let hp = $("#hp").val();
@@ -101,15 +100,14 @@ $(function() {
 
                     axios.post(url, frm)
                         .then((response) => {
-                            // console.dir(response);
-                            let checkUserid = response.data;
-                            if (userid) {
-                                location.href = '/am/searchUser/'+idx;
-                                alert("수정 완료");
+                            let userid = response.data;
+                            if (userid != null) {
+                                alert("등록 완료");
+                                location.href = '/am/searchUser/'+userid;
                                 // 부모창 유저 리스트 다시 로드
                                 opener.document.getElementById("reset").click();
                             } else {
-                                alert("수정 실패");
+                                alert("등록 실패");
                             }
                         })
                         .catch((error) => {
@@ -123,50 +121,27 @@ $(function() {
 
         },
         updated() { // 데이터가 변경되어 가상 DOM이 다시 렌더링되고 패치된 후 호출
-
+            let i = $("input[name='gender']").first().prop("checked", true);
         }
     });
 
     function showPopup(id) {
-        if (id == "userid" || id == "userpw") {
-            let obj = $("#"+id);
-            obj.addClass("borderRed");
-            // obj.focus(function() {
-            //     $(this).css("display", "block");
-            // })
-            // if (id == "userid") {
-            //     $("#msgCheckId").css("display", "block");
-            //     $("#"+id).addClass("borderRed");
-            //     $(".borderRed").focus(function() {
-            //         $(this).css("display", "block");
-            //     })
-            // } else {
-            //     $("#msgCheckPw").css("display", "block");
-            //     $("#"+id).addClass("borderRed");
-            //     $(".borderRed").focus(function() {
-            //         $(this).css("display", "block");
-            //     })
-            //
-            //     $("#"+id).addClass("borderRed");
-            // }
-        }
-    }
-
-    function hidePopup(id) {
-        if (id == "userid" || id == "userpw") {
-            if (id == "userid") {
-                $("#msgCheckId").css("display", "none");
-                $("#"+id).removeClass("borderRed");
-
-            } else {
-                $("#msgCheckPw").css("display", "none");
-                $("#"+id).removeClass("borderRed");
+        let msg = $("#"+id).parent().next();
+        if (msg != null) {
+            if (id == "userid" || id == "userpw" || id == "userpw_re") {
+                msg.css("display", "inline-block");
             }
         }
     }
 
-
-
+    function hidePopup(id) {
+        let msg = $("#"+id).parent().next("span");
+        if (msg != null) {
+            if (id == "userid" || id == "userpw" || id == "userpw_re") {
+                msg.css("display", "none");
+            }
+        }
+    }
 
     getGender();
 
@@ -218,16 +193,35 @@ $(function() {
         $("#checkPwState").val("n");
     }
 
+    function checkPwReset() {
+        $("#checkPwF").css("display", "none");
+        $("#checkPwS").css("display", "none");
+        $("#checkPwState").val("n");
+    }
+
     /* parameter check */
     function checkParam() {
-        let checkIdState = $("input#checkIdState");
-        let checkPwState = $("input#checkPwState");
-        let email = $("input#email").val();
-        let hp = $("input#hp").val();
+        let checkIdState = $("input#checkIdState").val();
+        let checkPwState = $("input#checkPwState").val();
+        let email = $("input#email");
+        let name = $("input#name");
+        let hp = $("input#hp");
         let userpw = $("#userpw");
 
         if (checkIdState != 'y' && checkIdState == 'n') {
             alert("아이디 체크 버튼을 클릭하세요.");
+            return false;
+        }
+
+        if (name.val().length == 0 || name == null) {
+            alert("이름을 입력하세요.");
+            name.focus();
+            return false;
+        }
+
+        if (!isName(name.val())) {
+            alert("이름 형식을 확인하세요.");
+            name.focus();
             return false;
         }
         
@@ -241,14 +235,21 @@ $(function() {
             return false;
         }
 
-        if (email.length == 0 || email == null) {
+        if (email.val().length == 0 || email == null) {
             alert("이메일을 입력하세요.");
-            $("input#email").focus();
+            email.focus();
             return false;
         }
-        if (hp.length == 0 || hp == null || hp.length != 13) {
-            alert("휴대폰 번호 형식을 확인하세요.(000-0000-0000)");
-            $("input#hp").focus();
+
+        if (!isEmail(email.val())) {
+            alert("이메일 형식을 확인하세요.");
+            email.focus();
+            return false;
+        }
+
+        if (!isHp(hp.val())) {
+            alert("연락처 형식을 확인하세요.");
+            hp.focus();
             return false;
         }
 
@@ -258,12 +259,30 @@ $(function() {
     /* 정규식 시작 */
     // 아이디 정규식
     function isId(asValue) {
-        const regExp = /^[a-zA-Z](?=.*[a-zA-Z])(?=.*[0-9]).{6,20}$/g; // 6~20자 영문+숫자 조합
+        const regExp = /^([A-za-z]{0,0})(?=.*[a-zA-Z])(?=.*[0-9]).{6,20}$/g; // 6~20자 영문+숫자 조합
         return regExp.test(asValue);
     }
 
+    function isName(asValue) {
+        const regExp = /^[가-힣]{2,5}$/;
+        return regExp.test(asValue);
+    }
+
+    // 비밀번호 정규식
     function isPw(asValue) {
-        const regExp = /^[a-zA-Z0-9](?=.*[a-zA-Z])(?=.*[0-9]).{3,12}$/g;
+        const regExp = /^.*(?=^.{6,20}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;; // 6~20자 영문+숫자+특수문자 조합
+        return regExp.test(asValue);
+    }
+
+    // 이메일 정규식
+    function isEmail(asValue) {
+        const regExp = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+        return regExp.test(asValue);
+    }
+
+    // 연락처 정규식
+    function isHp(asValue) {
+        const regExp = /^\d{3}-\d{4}-\d{4}$/;
         return regExp.test(asValue);
     }
 });
