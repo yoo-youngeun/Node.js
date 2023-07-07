@@ -8,37 +8,39 @@
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <link rel="stylesheet" href="/css/admin/home.css">
     <link rel="stylesheet" href="/css/admin/index.css">
 </head>
 <body>
-<div id="homeMenu">
-
-</div>
 <div id="container">
     <div id="userTab" class="tab">
+        <div class="chartWrap">
+            <div id="pieChart" class="chart" :labels="labels" :series="series"></div>
+<!--            <apexCharts width="100%" type="pie" :options="chartOptions" :series="series"/>-->
+        </div>
         <div id="title_user" class="title">신규 회원</div>
         <table id="userTable" class="table table-border">
             <colgroup>
+                <col width="32%">
                 <col width="30%">
-                <col width="30%">
-                <col width="40%">
+                <col width="38%">
             </colgroup>
             <tr>
                 <th>아이디</th>
-                <th>이름</th>
-                <th>가입일</th>
+                <th style="text-align: center">이름</th>
+                <th style="text-align: center">가입일</th>
             </tr>
             <tr v-for="user in userList">
                 <td>{{user.userid}}</td>
-                <td>{{user.name}}</td>
-                <td>{{user.regDate.substring(0,10)}}</td>
+                <td style="text-align: center">{{user.name}}</td>
+                <td style="text-align: right">{{user.regDate.substring(0,10)}}</td>
             </tr>
         </table>
-        <a href="/am/users/user" class="moreLink">more</a>
+        <a href="/am/users/user" class="moreLink" id="menu_users_user">more</a>
     </div>
     <div id="orderTab" class="tab">
-        <div id="title_order" class="title">신규 주문</div>
+        <div id="title_order" class="title"></div>
         <table id="orderTable" class="table table-border">
             <colgroup>
             </colgroup>
@@ -47,7 +49,7 @@
         <a href="" class="moreLink"></a>
     </div>
     <div id="itemTab" class="tab">
-        <div id="title_item" class="title">신규 아이템</div>
+        <div id="title_item" class="title"></div>
         <table id="itemTable" class="table table-border">
             <colgroup>
             </colgroup>
@@ -55,7 +57,7 @@
         <a href="" class="moreLink"></a>
     </div>
     <div id="partnerTab" class="tab">
-        <div id="title_partner" class="title">신규 파트너사</div>
+        <div id="title_partner" class="title"></div>
         <table id="partnerTable" class="table table-border">
             <colgroup>
             </colgroup>

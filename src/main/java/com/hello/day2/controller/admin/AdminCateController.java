@@ -1,7 +1,7 @@
 package com.hello.day2.controller.admin;
 
+import com.hello.day2.enumclass.CateType;
 import com.hello.day2.enumclass.Gender;
-import com.hello.day2.enumclass.UserStatus;
 import com.hello.day2.model.entity.Users;
 import com.hello.day2.repository.UsersRepository;
 import com.hello.day2.service.UsersService;
@@ -28,7 +28,7 @@ public class AdminCateController {
 
     @GetMapping("/home")
     public ModelAndView home(ModelAndView mv) {
-        mv.setViewName("/html/admin/home");
+        mv.setViewName("/html/admin/cate/home");
         return mv;
     }
 
@@ -40,14 +40,14 @@ public class AdminCateController {
         return usersList;
     }
 
-    @GetMapping("/searchUsers/top")
+    @GetMapping("/searchCates/top")
     @ResponseBody
     public List<Users> searchUsersTop() {
         List<Users> usersList = service.searchUsersTop();
         return usersList;
     }
 
-    @PostMapping("/searchUser")
+    @PostMapping("/searchCates")
     @ResponseBody
     public List<Users> searchUser(@RequestParam(required = false) Map<String, String> param) {
         List<Users> usersList = service.searchUser(param);
@@ -56,11 +56,11 @@ public class AdminCateController {
 
     @GetMapping("/searchUser/{id}")
     public ModelAndView viewPage(@PathVariable String id) {
-        ModelAndView mv = new ModelAndView("/html/admin/users/viewUser");
+        ModelAndView mv = new ModelAndView("/html/admin/cate/viewUser");
         return mv;
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/cate/{id}")
     @ResponseBody
     public Optional<Users> getUser(@PathVariable("id") Long id) {
         Optional<Users> user = repository.findUsersById(id);
@@ -69,7 +69,7 @@ public class AdminCateController {
 
     @GetMapping("/updatePage/{id}")
     public ModelAndView updatePage(@PathVariable Long id){
-        ModelAndView mv = new ModelAndView("/html/admin/users/updateUser");
+        ModelAndView mv = new ModelAndView("/html/admin/cate/updateCate");
         return mv;
     }
 
@@ -92,20 +92,20 @@ public class AdminCateController {
         return userid;
     }
 
-    @GetMapping("/getStatusList")
+    @GetMapping("/getCateTypeList")
     @ResponseBody
-    public List<UserStatus> getStatusList() {
-        UserStatus[] userStatuses = UserStatus.values();
-        List<UserStatus> statusList = new ArrayList<>();
-        for (int i = 0; i < userStatuses.length; i++) {
-            statusList.add(userStatuses[i]);
+    public List<CateType> getCateTypeList() {
+        CateType[] cateTypes = CateType.values();
+        List<CateType> cateList = new ArrayList<>();
+        for (int i = 0; i < cateTypes.length; i++) {
+            cateList.add(cateTypes[i]);
         }
-        return statusList;
+        return cateList;
     }
 
     @GetMapping("/createUserPage")
     public ModelAndView createUserPage(){
-        ModelAndView mv = new ModelAndView("/html/admin/users/createUser");
+        ModelAndView mv = new ModelAndView("/html/admin/cate/users/createUser");
         return mv;
     }
 

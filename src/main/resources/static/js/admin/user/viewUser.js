@@ -1,5 +1,5 @@
 $(function() {
-    let idx = $(location).attr('href').split("/")[5];
+    let idx = $(location).attr('href').split("/")[6];
     let width = $("body").width();
     $("table#viewResult div#buttArea").css("width", width);
 

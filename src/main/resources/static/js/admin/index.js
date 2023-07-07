@@ -6,6 +6,9 @@ $(function() {
     $(".list-group-item:last-child").css({"height" : lastMenu});
 
     $("#content").attr("src", "/am/users/home");
+    $("#logo").click(function() {
+        window.location.reload();
+    })
 
     // Menu 클릭 시 이벤트
     $(".menu").bind("click", function () {

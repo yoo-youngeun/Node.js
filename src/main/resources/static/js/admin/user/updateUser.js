@@ -1,7 +1,7 @@
 'use strict';
 $(function() {
     let userStatus;
-    let idx = $(location).attr('href').split("/")[5];
+    let idx = $(location).attr('href').split("/")[6];
 
     let updateUser = new Vue({
         // el : 연결할 영역을 지정

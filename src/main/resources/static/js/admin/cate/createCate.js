@@ -21,12 +21,6 @@ $(function() {
 
                     let Cateid = $("#Cateid").val();
                     let Catepw = $("#Catepw").val();
-                    let genderList = $("input[name='gender']");
-                    let gender = "";
-                    genderList.each(function() {if($(this).is(":checked")){gender = $(this).val();}})
-                    let name = $("#name").val();
-                    let email = $("#email").val();
-                    let hp = $("#hp").val();
 
                     const frm = new FormData();
                     frm.append('Cateid', Cateid);
@@ -64,140 +58,21 @@ $(function() {
     });
 
     /* gender list 가져와 select option 추가 시작 */
-    getGender();
+    getCateType();
+    /* 상태값 리스트 리턴 */
+    function getCateType() {
+        axios({
+            url: '/am/cate/getCateTypeList', // 통신할 웹문서
+            method: 'get' // 통신 방식
+        }).then(function (response) {
+            // console.dir(response.data);
+            createCate.statusList = response.data;
 
-    function getGender() {
-        axios.get("/am/cate/getGenderList")
-            .then((response) => {
-                // console.dir(response.data);
-                createCate.genderList = response.data;
-            })
-            .catch((error) => {
-                // 예외 처리
-                console.dir(error);
-            });
-    }
-    /* gender list select option 추가 끝 */
-    
-    /* 비밀번호 형식 메시지 - show, hide 시작*/
-    // 비밀번호 형식 메시지 - show
-    function showPopup(id) {
-        let msg = $("#"+id).parent().next();
-        if (msg != null) {
-            if (id == "Cateid" || id == "Catepw" || id == "Catepw_re") {
-                msg.css("display", "inline-block");
-            }
-        }
-    }
-
-    // 비밀번호 형식 메시지 - hide
-    function hidePopup(id) {
-        let msg = $("#"+id).parent().next("span");
-        if (msg != null) {
-            if (id == "Cateid" || id == "Catepw" || id == "Catepw_re") {
-                msg.css("display", "none");
-            }
-        }
-    }
-    /*비밀번호 형식 메시지 - show, hide 끝*/
-
-
-    /* 아이디 중복확인 시작 */
-    function checkId() {
-        let Cateid = $("#Cateid");
-        if (Cateid.val().length != 0) {
-            if (isId(Cateid.val())) {
-                let url = "/am/cate/checkCateid?Cateid="+Cateid.val();
-                axios.get(url).then((response) => {
-                        let checkCateid = response.data;
-                        if (checkCateid == 'y' && checkCateid != 'n') {
-                            alert("사용 가능한 아이디입니다.");
-                            checkIdSuccess();
-                        } else {
-                            alert("사용 불가능한 아이디입니다.");
-                            checkIdFail();
-                        }
-                })
-            } else {
-                alert("아이디 형식을 확인하세요.");
-                Cateid.focus();
-            }
-        } else {
-            alert("아이디를 입력하세요.");
-            Cateid.focus();
-        }
-    }
-    /* 아이디 중복확인 끝 */
-
-    /* 비밀번호 keyup event 시작*/
-    function checkPw(evnet) {
-        let id = event.currentTarget.id;
-
-        let Catepw = $("#Catepw");
-        let Catepw_re = $("#Catepw_re");
-        let obj = $("#"+id);
-
-        if (obj.val().length > 0) {
-            if (isPw(obj.val())) {
-                hidePopup(id);
-            } else {
-                showPopup(id);
-            }
-            if(Catepw_re.val().length <= 0) {
-                checkPwReset();
-            } else {
-                if (Catepw.val() == Catepw_re.val() && Catepw.val().length == Catepw_re.val().length && isPw(Catepw_re.val())) {
-                    checkPwSuccess();
-                    hidePopup(id);
-                } else {
-                    checkPwFail();
-                }
-            }
-        }
-    }
-    /* 비밀번호 keyup event 끝*/
-
-    /* id, 비밀번호 형식 체크여부 시작*/
-    // 아이디 체크 성공
-    function checkIdSuccess() {
-        $("#checkId").val("✔");
-        $("#checkId").removeClass("checkIdFail");
-        $("#checkId").addClass("checkIdSuccess");
-        $("#checkIdState").val("y");
-    }
-
-    // 아이디 체크 실패
-    function checkIdFail() {
-        $("#checkId").val("중복체크");
-        $("#checkId").addClass("checkIdFail");
-        $("#checkId").removeClass("checkIdSuccess");
-        $("#checkIdState").val("n");
-    }
-
-    // 비밀번호 체크 성공
-    function checkPwSuccess() {
-        $("#checkPwS").css({
-            "display" : "inline-block",
-            "color" : "forestgreen"
+            // searchUser();
         });
-        $("#checkPwF").css("display", "none");
-        $("#checkPwState").val("y");
     }
 
-    // 비밀번호 체크 실패
-    function checkPwFail() {
-        $("#checkPwF").css("display", "inline-block");
-        $("#checkPwS").css("display", "none");
-        $("#checkPwState").val("n");
-    }
 
-    // 비밀번호 체크 초기화
-    function checkPwReset() {
-        $("#checkPwF").css("display", "none");
-        $("#checkPwS").css("display", "none");
-        $("#checkPwState").val("n");
-    }
-    /* id, 비밀번호 형식 체크여부 표시 끝*/
 
     /* parameter check 시작 */
     function checkParam() {

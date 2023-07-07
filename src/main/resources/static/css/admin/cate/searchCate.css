@@ -31,8 +31,11 @@ body > div#searchCate > div#searchTab > form#frm > table#searchTable {
     border-style: none;
 }
 
-body > div#searchCate > div#searchTab > form#frm > table#searchTable tr, th, td {
+body > div#searchCate > div#searchTab > form#frm > table#searchTable tr,
+body > div#searchCate > div#searchTab > form#frm > table#searchTable tr th,
+body > div#searchCate > div#searchTab > form#frm > table#searchTable tr td {
     border-style: none;
+    height: 64px;
 }
 
 body > div#searchCate > div#searchTab > form#frm > table#searchTable > tr > th, td > input.form-control {

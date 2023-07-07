@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
 * {
     position: relative;
     text-overflow: ellipsis;
@@ -12,11 +14,23 @@ body > div#container{
 }
 
 body > div#container > div.tab {
-    width: 22%;
-    height: 280px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 330px;
+    height: 100%;
     border-radius: 4px;
     border: 1px solid dimgray;
     padding: 3px;
+    padding-top: 5px;
+}
+
+body > div#container > div.tab > div.chartWrap {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    padding: 3px;
+    border-bottom: 1px solid black;
 }
 
 body > div#container > div.tab > div.title {
@@ -34,6 +48,10 @@ body > div#container > div.tab > table.table {
 body > div#container > div.tab > table.table td,
 body > div#container > div.tab > table.table th {
     font-size: 12px !important;
+}
+
+body > div#container > div.tab > table.table tr:last-child td {
+    border-bottom: none !important;
 }
 
 body > div#container > div.tab > a.moreLink {

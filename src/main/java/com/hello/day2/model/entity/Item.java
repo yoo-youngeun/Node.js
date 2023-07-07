@@ -28,4 +28,5 @@ public class Item {
     private LocalDateTime updateDate;
     private String updateBy;
     private Long partnerId;
+    private Long cateId;
 }
