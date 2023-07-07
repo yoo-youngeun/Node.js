@@ -1,6 +1,7 @@
 package com.hello.day2.repository;
 
 import com.hello.day2.Day2ApplicationTests;
+import com.hello.day2.enumclass.CateType;
 import com.hello.day2.model.entity.Category;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,8 @@ public class CategoryRepositoryTest extends Day2ApplicationTests {
     @Test
     public void create() {
         Category category = Category.builder()
-                .type("전자제품")
-                .title("맥북")
+                .type(CateType.ETC)
+                .title("")
                 .regDate(LocalDateTime.now())
                 .updateBy("admin")
                 .build();

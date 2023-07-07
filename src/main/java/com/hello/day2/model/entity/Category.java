@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -24,4 +23,5 @@ public class Category {
     private LocalDateTime regDate;
     private String updateBy;
     private LocalDateTime updateDate;
+    private Long adminId;
 }

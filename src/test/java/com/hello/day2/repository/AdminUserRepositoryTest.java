@@ -14,8 +14,8 @@ public class AdminUserRepositoryTest extends Day2ApplicationTests {
     @Test
     public void create() {
         AdminUser adminUser = AdminUser.builder()
-                .userid("apple")
-                .userpw("1111")
+                .userid("admin")
+                .userpw("admin")
                 .name("김사과")
                 .status("사용중")
                 .regDate(LocalDateTime.now())
@@ -27,13 +27,12 @@ public class AdminUserRepositoryTest extends Day2ApplicationTests {
 
     @Test
     public void update() {
-        Optional<AdminUser> findUser = adminUserRepository.findAdminUserByUserid("apple");
+        Optional<AdminUser> findUser = adminUserRepository.findAdminUserByUserid("admin");
 
         // ifPresent : 값을 가지고 있는지 확인 후 예외처리
         findUser.ifPresent(
                 selectUser -> {
-                    selectUser.setName("김애플");
-                    selectUser.setStatus("탈퇴");
+                    selectUser.setName("관리자");
                     adminUserRepository.save(selectUser);
                 }
         );

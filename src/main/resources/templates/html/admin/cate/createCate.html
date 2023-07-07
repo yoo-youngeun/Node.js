@@ -17,7 +17,7 @@
 <body>
 <div id="createCate">
     <form @submit.prevent="submitForm">
-        <div id="title">키테고리등록<hr></div>
+        <div id="formTitle">키테고리등록<hr></div>
         <div id="result">
             <table id="viewResult" class="table table-striped-columns">
                 <colgroup>
@@ -29,10 +29,22 @@
                 <tr>
                     <th>유형</th>
                     <td>
-                        <input type="text" name="type" id="cateType" value="">
+                        <select id="cateList" name="type" v-on:click.once="[getCateType()]">
+                            <option name="cateType" v-for="type in cateTypeList" v-model="type" :id="type">{{type}}</option>
+                        </select>
                     </td>
                     <th>카테고리명</th>
-                    <td><input type="text" name="name" id="name" placeholder="한글 2-8자" ></td>
+                    <td><input type="text" name="title" id="title"></td>
+                </tr>
+                <tr>
+                    <th>등록일</th>
+                    <td><input type="date" name="regDate" id="regDate"></td>
+                    <th>작성자</th>
+                    <td>
+                        <select id="adminList" name="adminName" v-on:click.once="[getAdmin()]">
+                            <option v-for="admin in adminList" v-model="admin.name" :value="admin.id" :id="admin.name" readonly>{{admin.name}}</option>
+                        </select>
+                    </td>
                 </tr>
             </table>
             <div id="buttArea">

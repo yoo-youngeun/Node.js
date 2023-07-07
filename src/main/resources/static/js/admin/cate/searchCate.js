@@ -4,12 +4,12 @@ $(function() {
     let buttHeight = $("#searchTable").height();
     $("#button.btn").css("height", buttHeight);
 
-    let CateList = new Vue({
+    let cateList = new Vue({
         // el : 연결할 영역을 지정
         el: "#searchResult",
         // data : 데이터 값
         data : {
-            CateList : {}
+            cateTypeList : {}
         },
         methods: {
             viewPage : function(url) {
@@ -18,15 +18,14 @@ $(function() {
         }
     });
 
-    searchCate();
+    searchCategory();
 
-    function searchCate() {
+    function searchCategory() {
         axios({
-            url: '/am/cate/searchCate', // 통신할 웹문서
+            url: '/am/cate/getCateTypeList', // 통신할 웹문서
             method: 'get' // 통신 방식
         }).then(function (response) {
-            // console.dir(response.data);
-            CateList.CateList = response.data;
+            cateList.cateTypeList = response.data;
         });
     }
 
@@ -73,7 +72,7 @@ $(function() {
     })
 
     $("#createCate").on("click", function() {
-        window.open("/am/cate/createCatePage", '_target', "width=860,height=600");
+        window.open("/am/cate/createCatePage", '_target', "width=700,height=250");
     })
 
 

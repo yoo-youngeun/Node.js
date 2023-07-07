@@ -1,43 +1,44 @@
 'use strict';
 
 $(function() {
+
     let createCate = new Vue({
         // el : 연결할 영역을 지정
         el : "#createCate",
         // data : 데이터 값
         data : {
-            genderList : {}
+            cateTypeList : {},
+            adminList : {}
         },
         methods : {
-            resetCheckPw: function(event) { // 비밀번호 형식 체크
-                checkPw(event);
+            getCateType: function() {
+                getCateTypeList();
             },
-            checkId: function() { // 아이디 중복 확인
-                checkId();
+            getAdmin: function() {
+                getAdminList();
             },
             submitForm: function() { // 유저 등록
                 if (checkParam()){
-                    let url = '/am/cate/createCate/';
+                    let url = '/am/cate/createCate';
 
-                    let Cateid = $("#Cateid").val();
-                    let Catepw = $("#Catepw").val();
+                    let type = $("#type").val();
+                    let title = $("#title").val();
+                    let adminId = $("#adminList").val();
+                    alert(type+"::"+title+"::"+adminId)
 
                     const frm = new FormData();
-                    frm.append('Cateid', Cateid);
-                    frm.append('Catepw', Catepw);
-                    frm.append('name', name);
-                    frm.append('email', email);
-                    frm.append('gender', gender);
-                    frm.append('hp', hp);
+                    frm.append('type', type);
+                    frm.append('title', title);
+                    frm.append('adminId', adminId);
 
                     axios.post(url, frm)
                         .then((response) => {
-                            let Cateid = response.data;
-                            if (Cateid != null) {
+                            let createId = response.data;
+                            if (createId != null) {
                                 alert("등록 완료");
-                                location.href = '/am/cate/searchCate/'+Cateid;
-                                // 부모창 유저 리스트 다시 로드
-                                opener.document.getElementById("reset").click();
+                                // location.href = '/am/cate/searchCate/'+cateId;
+                                // // 부모창 유저 리스트 다시 로드
+                                // opener.document.getElementById("reset").click();
                             } else {
                                 alert("등록 실패");
                             }
@@ -53,78 +54,51 @@ $(function() {
 
         },
         updated() { // 데이터가 변경되어 가상 DOM이 다시 렌더링되고 패치된 후 호출
-            $("input[name='gender']").first().prop("checked", true); // 첫번째 성별 체크
+            $("#cateList").find("option:eq(0)").prop("selected", true);
+
+            let today = new Date();
+            today = today.toISOString().slice(0, 10);
+
+            $("input[type=date]").val(today);
         }
     });
 
     /* gender list 가져와 select option 추가 시작 */
-    getCateType();
+
     /* 상태값 리스트 리턴 */
-    function getCateType() {
+    function getCateTypeList() {
         axios({
             url: '/am/cate/getCateTypeList', // 통신할 웹문서
             method: 'get' // 통신 방식
         }).then(function (response) {
-            // console.dir(response.data);
-            createCate.statusList = response.data;
-
-            // searchUser();
+            createCate.cateTypeList = response.data;
         });
     }
 
-
+    getAdminList();
+    /* 상태값 리스트 리턴 */
+    function getAdminList() {
+        axios({
+            url: '/am/cate/getAdmin', // 통신할 웹문서
+            method: 'get' // 통신 방식
+        }).then(function (response) {
+            // console.dir(response.data);
+            createCate.adminList = response.data;
+        });
+    }
 
     /* parameter check 시작 */
     function checkParam() {
-        let checkIdState = $("input#checkIdState").val();
-        let checkPwState = $("input#checkPwState").val();
-        let email = $("input#email");
-        let name = $("input#name");
-        let hp = $("input#hp");
-        let Catepw = $("#Catepw");
+        let type = $("select#cateList");
+        let title = $("input#title");
 
-        if (checkIdState != 'y' && checkIdState == 'n') {
-            alert("아이디 체크 버튼을 클릭하세요.");
+        if (type.val() == null || type.val().length == 0) {
+            alert("유형을 선택하세요.");
             return false;
         }
 
-        if (name.val().length == 0 || name == null) {
-            alert("이름을 입력하세요.");
-            name.focus();
-            return false;
-        }
-
-        if (!isName(name.val())) {
-            alert("이름 형식을 확인하세요.");
-            name.focus();
-            return false;
-        }
-        
-        if (checkPwState != 'y' && checkPwState == 'n') {
-            alert("비밀번호가 불일치합니다.");
-            return false;
-        }
-
-        if (!isPw(Catepw.val())) {
-            alert("비밀번호 형식을 확인하세요.");
-            return false;
-        }
-
-        if (email.val().length == 0 || email == null) {
-            alert("이메일을 입력하세요.");
-            email.focus();
-            return false;
-        }
-
-        if (!isEmail(email.val())) {
-            alert("이메일 형식을 확인하세요.");
-            email.focus();
-            return false;
-        }
-
-        if (!isHp(hp.val())) {
-            alert("연락처 형식을 확인하세요.");
-            hp.focus();
+        if (title.val() == null || title.val().length <= 0) {
+            alert("카테고리명을 입력하세요.");
             return false;
         }
 
@@ -137,35 +111,5 @@ $(function() {
         window.open('','_self').close();
     })
     /* Button 영역 끝*/
-
-    /* 정규식 시작 */
-    // 아이디 정규식
-    function isId(asValue) {
-        const regExp = /^([A-za-z]{0,0})(?=.*[a-zA-Z])(?=.*[0-9]).{6,20}$/g; // 6~20자 영문+숫자 조합
-        return regExp.test(asValue);
-    }
-
-    function isName(asValue) {
-        const regExp = /^[가-힣]{2,8}$/;
-        return regExp.test(asValue);
-    }
-
-    // 비밀번호 정규식
-    function isPw(asValue) {
-        const regExp = /^.*(?=^.{6,20}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;; // 6~20자 영문+숫자+특수문자 조합
-        return regExp.test(asValue);
-    }
-
-    // 이메일 정규식
-    function isEmail(asValue) {
-        const regExp = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
-        return regExp.test(asValue);
-    }
-
-    // 연락처 정규식
-    function isHp(asValue) {
-        const regExp = /^\d{3}-\d{4}-\d{4}$/;
-        return regExp.test(asValue);
-    }
 });
 

@@ -1,9 +1,12 @@
 package com.hello.day2.controller.admin;
 
 import com.hello.day2.enumclass.CateType;
-import com.hello.day2.enumclass.Gender;
+import com.hello.day2.model.entity.AdminUser;
+import com.hello.day2.model.entity.Category;
 import com.hello.day2.model.entity.Users;
+import com.hello.day2.repository.AdminUserRepository;
 import com.hello.day2.repository.UsersRepository;
+import com.hello.day2.service.CategoryService;
 import com.hello.day2.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,10 +18,16 @@ import java.util.*;
 @RequestMapping("/am/cate")
 public class AdminCateController {
     @Autowired
-    private UsersService service;
+    private UsersService usersService;
 
     @Autowired
-    private UsersRepository repository;
+    private CategoryService cateService;
+
+    @Autowired
+    private UsersRepository usersRepository;
+    
+    @Autowired
+    private AdminUserRepository adminUsersRepository;
 
     @GetMapping("")
     public ModelAndView index(ModelAndView mv) {
@@ -26,33 +35,27 @@ public class AdminCateController {
         return mv;
     }
 
-    @GetMapping("/home")
-    public ModelAndView home(ModelAndView mv) {
-        mv.setViewName("/html/admin/cate/home");
-        return mv;
-    }
 
+//    @GetMapping("/searchUsers")
+//    @ResponseBody
+//    public List<Users> searchUsers() {
+//        List<Users> usersList = usersService.searchUsers();
+//        return usersList;
+//    }
 
-    @GetMapping("/searchUsers")
-    @ResponseBody
-    public List<Users> searchUsers() {
-        List<Users> usersList = service.searchUsers();
-        return usersList;
-    }
+//    @GetMapping("/searchCates/top")
+//    @ResponseBody
+//    public List<Users> searchUsersTop() {
+//        List<Users> usersList = usersService.searchUsersTop();
+//        return usersList;
+//    }
 
-    @GetMapping("/searchCates/top")
-    @ResponseBody
-    public List<Users> searchUsersTop() {
-        List<Users> usersList = service.searchUsersTop();
-        return usersList;
-    }
-
-    @PostMapping("/searchCates")
-    @ResponseBody
-    public List<Users> searchUser(@RequestParam(required = false) Map<String, String> param) {
-        List<Users> usersList = service.searchUser(param);
-        return usersList;
-    }
+//    @PostMapping("/searchCates")
+//    @ResponseBody
+//    public List<Users> searchUser(@RequestParam(required = false) Map<String, String> param) {
+//        List<Users> usersList = usersService.searchUser(param);
+//        return usersList;
+//    }
 
     @GetMapping("/searchUser/{id}")
     public ModelAndView viewPage(@PathVariable String id) {
@@ -60,12 +63,12 @@ public class AdminCateController {
         return mv;
     }
 
-    @GetMapping("/cate/{id}")
-    @ResponseBody
-    public Optional<Users> getUser(@PathVariable("id") Long id) {
-        Optional<Users> user = repository.findUsersById(id);
-        return user;
-    }
+//    @GetMapping("/cate/{id}")
+//    @ResponseBody
+//    public Optional<Users> getUser(@PathVariable("id") Long id) {
+//        Optional<Users> user = usersRepository.findUsersById(id);
+//        return user;
+//    }
 
     @GetMapping("/updatePage/{id}")
     public ModelAndView updatePage(@PathVariable Long id){
@@ -73,23 +76,35 @@ public class AdminCateController {
         return mv;
     }
 
-    @PostMapping("/updateUser/{id}")
-    @ResponseBody
-    public String updateUser(@PathVariable Long id, @RequestParam(required = false) Map<String, String> param) throws Exception {
-        System.out.println(param.get("userid")+param.get("email")+param.get("hp")+param.get("status"));
-        String userid = "";
-        try {
-            Users user = service.updateUser(param);
+//    @PostMapping("/updateUser/{id}")
+//    @ResponseBody
+//    public String updateUser(@PathVariable Long id, @RequestParam(required = false) Map<String, String> param) throws Exception {
+//        System.out.println(param.get("userid")+param.get("email")+param.get("hp")+param.get("status"));
+//        String userid = "";
+//        try {
+//            Users user = usersService.updateUser(param);
+//
+//            if(user != null) {
+//                userid = user.getUserid();
+//            } else {
+//                userid = "";
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return userid;
+//    }
 
-            if(user != null) {
-                userid = user.getUserid();
-            } else {
-                userid = "";
-            }
+    @GetMapping("/getAdmin")
+    @ResponseBody
+    public List<AdminUser> getAdmin() throws Exception{
+        List<AdminUser> admin = null;
+        try {
+            admin = adminUsersRepository.findAll();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return userid;
+        return admin;
     }
 
     @GetMapping("/getCateTypeList")
@@ -103,16 +118,16 @@ public class AdminCateController {
         return cateList;
     }
 
-    @GetMapping("/createUserPage")
+    @GetMapping("/createCatePage")
     public ModelAndView createUserPage(){
-        ModelAndView mv = new ModelAndView("/html/admin/cate/users/createUser");
+        ModelAndView mv = new ModelAndView("/html/admin/cate/createCate");
         return mv;
     }
 
     @GetMapping("/checkUserid")
     @ResponseBody
     public String checkUserid(@RequestParam String userid) throws Exception {
-        Users user = repository.findUsersByUserid(userid);
+        Users user = usersRepository.findUsersByUserid(userid);
         String checkUserid = "n";
         try {
             if (user == null) {
@@ -124,22 +139,12 @@ public class AdminCateController {
         return checkUserid;
     }
 
-    @GetMapping("/getGenderList")
-    @ResponseBody
-    public List<Gender> getGenderList() {
-        Gender[] genders = Gender.values();
-        List<Gender> genderList = new ArrayList<>();
-        for (int i = 0; i < genders.length; i++) {
-            genderList.add(genders[i]);
-        }
-        return genderList;
-    }
 
-    @PostMapping("/createUser")
+    @PostMapping("/createCate")
     @ResponseBody
     public String createUser(@RequestParam(required = false) Map<String, String> param){
-        Users createUser = service.createUser(param);
-        return String.valueOf(createUser.getId());
+        Category createCate = cateService.createCate(param);
+        return String.valueOf(createCate.getId());
     }
 
 }
