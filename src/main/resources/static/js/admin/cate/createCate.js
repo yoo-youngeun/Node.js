@@ -13,6 +13,7 @@ $(function() {
         methods : {
             getCateType: function() {
                 getCateTypeList();
+                $("#cateList").val("ETC").prop("selected", true);
             },
             getAdmin: function() {
                 getAdminList();
@@ -21,10 +22,9 @@ $(function() {
                 if (checkParam()){
                     let url = '/am/cate/createCate';
 
-                    let type = $("#type").val();
+                    let type = $("#cateList").val();
                     let title = $("#title").val();
                     let adminId = $("#adminList").val();
-                    alert(type+"::"+title+"::"+adminId)
 
                     const frm = new FormData();
                     frm.append('type', type);
@@ -54,12 +54,11 @@ $(function() {
 
         },
         updated() { // 데이터가 변경되어 가상 DOM이 다시 렌더링되고 패치된 후 호출
-            $("#cateList").find("option:eq(0)").prop("selected", true);
-
             let today = new Date();
             today = today.toISOString().slice(0, 10);
 
             $("input[type=date]").val(today);
+            $("#cateList").trigger("click");
         }
     });
 

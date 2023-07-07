@@ -30,7 +30,7 @@
                     <th>유형</th>
                     <td>
                         <select id="cateList" name="type" v-on:click.once="[getCateType()]">
-                            <option name="cateType" v-for="type in cateTypeList" v-model="type" :id="type">{{type}}</option>
+                            <option v-for="type in cateTypeList" :value=`${type}` v-model="type" :id="type">{{type}}</option>
                         </select>
                     </td>
                     <th>카테고리명</th>
@@ -42,7 +42,7 @@
                     <th>작성자</th>
                     <td>
                         <select id="adminList" name="adminName" v-on:click.once="[getAdmin()]">
-                            <option v-for="admin in adminList" v-model="admin.name" :value="admin.id" :id="admin.name" readonly>{{admin.name}}</option>
+                            <option v-for="admin in adminList" :value=`${admin.id}` v-model="admin.name" :id="admin.name" readonly>{{admin.name}}</option>
                         </select>
                     </td>
                 </tr>

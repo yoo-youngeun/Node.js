@@ -73,9 +73,6 @@ public class CategoryService {
 //    }
 
     public Category createCate(Map<String, String> param) {
-        System.out.println(param.get("type")+"::"
-                +param.get("title"+"::")
-                +param.get("adminId"));
         CateType type = CateType.valueOf(param.get("type"));
         String title = param.get("title");
         LocalDateTime regDate = LocalDateTime.now();
