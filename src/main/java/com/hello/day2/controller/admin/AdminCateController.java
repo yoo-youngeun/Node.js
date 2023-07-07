@@ -5,6 +5,7 @@ import com.hello.day2.model.entity.AdminUser;
 import com.hello.day2.model.entity.Category;
 import com.hello.day2.model.entity.Users;
 import com.hello.day2.repository.AdminUserRepository;
+import com.hello.day2.repository.CategoryRepository;
 import com.hello.day2.repository.UsersRepository;
 import com.hello.day2.service.CategoryService;
 import com.hello.day2.service.UsersService;
@@ -29,19 +30,26 @@ public class AdminCateController {
     @Autowired
     private AdminUserRepository adminUsersRepository;
 
+    @Autowired
+    private CategoryRepository cateRepository;
+
     @GetMapping("")
     public ModelAndView index(ModelAndView mv) {
         mv.setViewName("/html/admin/cate/searchCate");
         return mv;
     }
 
-
-//    @GetMapping("/searchUsers")
-//    @ResponseBody
-//    public List<Users> searchUsers() {
-//        List<Users> usersList = usersService.searchUsers();
-//        return usersList;
-//    }
+    @GetMapping("/searchCate")
+    @ResponseBody
+    public List<Category> searchUsers() {
+        List<Category> categoryList = cateRepository.findAll();
+        for(Category i : categoryList) {
+            System.out.println(i.getAdminId());
+            System.out.println(i.getRegDate());
+            System.out.println(i.getRegDate());
+        }
+        return categoryList;
+    }
 
 //    @GetMapping("/searchCates/top")
 //    @ResponseBody

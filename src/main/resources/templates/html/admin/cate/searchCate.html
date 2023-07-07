@@ -57,7 +57,7 @@
                     <th><div>카테고리명</div></th>
                     <th>유형</th>
                     <th>등록일</th>
-                    <th>수정자</th>
+                    <th>등록자</th>
                     <th>수정일</th>
                 </tr>
                 <tr v-for="cate in cateList">
@@ -66,12 +66,12 @@
                     </td>
                     <td>{{cate.type}}</td>
                     <td>{{cate.regDate.substring(0,10)}}</td>
-                    <td>{{cate.updateBy}}</td>
+                    <td>{{cate.adminId}}</td>
                     <td>{{cate.updateDate.substring(0,10)}}</td>
                 </tr>
             </table>
         </div>
     </div>
-    <script src="/js/admin/Cate/searchCate.js" /></script>
+    <script src="/js/admin/cate/searchCate.js" /></script>
 </body>
 </html>

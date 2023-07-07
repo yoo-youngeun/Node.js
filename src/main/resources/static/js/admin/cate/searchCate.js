@@ -9,7 +9,7 @@ $(function() {
         el: "#searchResult",
         // data : 데이터 값
         data : {
-            cateTypeList : {}
+            cateList : {}
         },
         methods: {
             viewPage : function(url) {
@@ -22,10 +22,11 @@ $(function() {
 
     function searchCategory() {
         axios({
-            url: '/am/cate/getCateTypeList', // 통신할 웹문서
+            url: '/am/cate/searchCate', // 통신할 웹문서
             method: 'get' // 통신 방식
         }).then(function (response) {
-            cateList.cateTypeList = response.data;
+            console.dir(response.data);
+            cateList.cateList = response.data;
         });
     }
 
